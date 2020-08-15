@@ -1,0 +1,22 @@
+#! /bin/bash
+
+# Install packages
+
+sudo xbps-install -Su
+sudo xbps-install -S $(cat repos)
+sudo xbps-install -S $(cat packagelist)
+
+# Install services
+
+sudo ln -s /etc/sv/dbus /var/service
+sudo ln -s /etc/sv/lightdm /var/service
+sudo ln -s /etc/sv/acpid /var/service
+#sudo ln -s /etc/sv/dbus /var/service
+#sudo ln -s /etc/sv/dbus /var/service
+modprobe kvm-amd
+sudo usermod --shell /bin/fish zen
+
+# creating bare repository
+mkdir .void
+cd .void
+git init --bare
