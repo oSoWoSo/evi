@@ -21,3 +21,12 @@ qemu
 git
 ntfs-3g
 rpmiextract
+steam
+nvidia-libs-32bit
+libgcc-32bit
+libstdc++-32bit
+libdrm-32bit
+libglvnd-32bit
+geany-plugins
+geany-plugins-extra
+zstd
