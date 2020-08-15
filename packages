@@ -7,7 +7,9 @@ fish-shell
 vsv
 vpm
 sakura
-gksu
+alsa-utils
+lxqt-sudo
+lxqt-policykit
 spacefm
 nano
 geany
