@@ -1,0 +1,8 @@
+nvidia
+nvidia-libs-32bit
+libgcc-32bit
+libstdc++-32bit
+libdrm-32bit
+libglvnd-32bit
+ntfs-3g
+
