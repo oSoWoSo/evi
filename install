@@ -18,7 +18,11 @@ sudo ln -s /etc/sv/lightdm /var/service
 sudo ln -s /etc/sv/acpid /var/service
 #sudo ln -s /etc/sv/dbus /var/service
 #sudo ln -s /etc/sv/dbus /var/service
+
+# nested virtualization AMD
 modprobe kvm-amd
+
+# make fish base shell
 sudo usermod --shell /bin/fish zen
 
 # creating bare repository
