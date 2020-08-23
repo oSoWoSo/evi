@@ -2,7 +2,7 @@ acpid
 acpi_call-dkms
 acpi
 cpupower
-thelmald
+thermald
 powertop
 dbus
 ntfs-3g
