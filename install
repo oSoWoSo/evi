@@ -58,7 +58,7 @@ echo
             nitrogen --restore &
             volumeicon &
             conky &" >> ~/.config/openbox/autostart
-        cp ~/bin/dotfiles/home/zen/.config/openbox/rc.xml ~/.config/openbox
+#        cp ~/bin/dotfiles/home/zen/.config/openbox/rc.xml ~/.config/openbox
     elif [[ $vm = "a" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/5_awesome)
 
