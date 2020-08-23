@@ -24,7 +24,7 @@ echo
             modprobe kvm-amd
 
             elif [[ $pass = "n" ]]; then
-
+        fi
     elif [[ $video = "a" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/3_ati)
         modprobe kvm-amd
