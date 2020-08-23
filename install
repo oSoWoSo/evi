@@ -4,13 +4,13 @@
 echo "$(tput setaf 1)						Starting Void Linux post-install script$(tput sgr 0)"
 
 # Install packages
-
 sudo xbps-install -Su
 sudo xbps-install -S $(cat INSTALL/1_repos)
 sudo xbps-install -S $(cat INSTALL/2_base)
 
+# Choose gpu
 echo "$(tput setaf 1)						Which GPU you using?$(tput sgr 0)"
-read -p "nvidia (n) or ati (a) or qemu (q)[n/a/q] " -n 1 video
+read -p "NVIDIA (n) or AMD (a) or QEMU (q)[n/a/q] " -n 1 video
 echo
     if [[ $video = "n" ]]; then
         sudo xbps-install -S $(cat INSTALL/3_nvidia)
