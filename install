@@ -37,6 +37,9 @@ echo alias xterm 'sakura' > ~/.config/fish/aliases.fish
 sudo echo cs_CZ.UTF-8 UTF-8 >> /etc/default/libc-locales
 sudo xbps-reconfigure -f glibc-locales
 
+# guest addition
+sudo vpm i qemu-ga
+
 # creating bare repository
 cd ~/
 mkdir .void
