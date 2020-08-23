@@ -1,2 +1,3 @@
-xf86-video-vesa
+xf86-video-qxl
 qemu-ga
+spice-vdagent
