@@ -24,6 +24,7 @@ echo
             modprobe kvm-amd
 
             elif [[ $pass = "n" ]]; then
+            echo "continuing"
             else
             echo "Invalid option. EXITING!"
             exit 1        
