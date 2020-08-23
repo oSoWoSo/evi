@@ -67,6 +67,9 @@ cd ~/
 mkdir .void
 cd .void
 git init --bare
+cd ~/bin
+git clone https://gitlab.com/awesome-void/awesomeVoid /dotfiles
+
 
 # Install services
 
