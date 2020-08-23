@@ -61,7 +61,9 @@ fi
 sudo usermod --shell /bin/fish zen
 echo ". ~/.config/fish/aliases.fish" >> ~/.config/fish/config.fish
 echo "alias xterm 'sakura'" >> ~/.config/fish/aliases.fish
-echo alias xterm='sakura' >> ~/.bashrc
+
+# socklog
+sudo usermod -a -G socklog $USER
 
 # čeština
 sudo nano /etc/default/libc-locales
