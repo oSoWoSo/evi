@@ -34,7 +34,7 @@ sudo usermod --shell /bin/fish zen
 echo alias xterm 'sakura' > ~/.config/fish/aliases.fish
 
 # čeština
-sudo echo cs_CZ.UTF-8 UTF-8 >> /etc/default/libc-locales
+sudo nano /etc/default/libc-locales
 sudo xbps-reconfigure -f glibc-locales
 
 # guest addition
