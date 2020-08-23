@@ -39,7 +39,7 @@ sudo xbps-install -Sy $(cat INSTALL/5_openbox)
 sudo usermod --shell /bin/fish zen
 echo ". ~/.config/fish/aliases.fish" >> ~/.config/fish/config.fish
 #echo "alias xterm 'sakura'" >> ~/.config/fish/aliases.fish
-echo alias xterm=sakura >> ~/.bashrc
+echo alias xterm='sakura' >> ~/.bashrc
 
 # čeština
 sudo nano /etc/default/libc-locales
