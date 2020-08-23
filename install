@@ -31,11 +31,11 @@ modprobe kvm-amd
 
 # make fish base shell
 sudo usermod --shell /bin/fish zen
-echo alias xterm 'sakura'
+echo alias xterm 'sakura' > ~/.config/fish/aliases.fish
 
 # čeština
-echo cs_CZ.UTF-8 UTF-8 >> /etc/default/libc-locales
-xbps-reconfigure -f glibc-locales
+sudo echo cs_CZ.UTF-8 UTF-8 >> /etc/default/libc-locales
+sudo xbps-reconfigure -f glibc-locales
 
 # creating bare repository
 cd ~/
