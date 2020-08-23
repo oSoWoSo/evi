@@ -36,7 +36,7 @@ read -p "openbox (o) or awesome (a) or nothing (n)[o/a/n] " -n 1 vm
 echo
     if [[ $vm = "o" ]]; then
         sudo xbps-install -S $(cat INSTALL/5_openbox)
-
+        sudo -u zen obmenu-generator -p -i -u -d -c
     elif [[ $vm = "a" ]]; then
         sudo xbps-install -S $(cat INSTALL/5_awesome)
     elif [[ $vm = "n" ]]; then
