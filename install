@@ -17,8 +17,14 @@ echo
     if [[ $video = "n" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/3_nvidia)
         sudo nvidia-xconfig
-        modprobe kvm-amd
         
+        read -p "Want install PCI passthrough? NO (n) or YES (y)      [n/y] " -n 1 pass
+        echo
+            if [[ $pass = "y" ]]; then
+            modprobe kvm-amd
+
+            elif [[ $pass = "n" ]]; then
+
     elif [[ $video = "a" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/3_ati)
         modprobe kvm-amd
@@ -48,6 +54,24 @@ echo
             nitrogen --restore &
             volumeicon &
             conky &" >> ~/.config/openbox/autostart
+
+        echo "<!-- Window Tiling: Emulates Windows 7 Snap feature JASON CAVETT -->
+            <keybind key="W-Left">
+                <action name="UnmaximizeFull"/>
+                <action name="MaximizeVert"/>
+                <action name="MoveResizeTo">
+                    <width>50%</width>
+                </action>
+                <action name="MoveToEdgeWest"/>
+            </keybind>
+            <keybind key="W-Right">
+                <action name="UnmaximizeFull"/>
+                <action name="MaximizeVert"/>
+                <action name="MoveResizeTo">
+                    <width>50%</width>
+                </action>
+                <action name="MoveToEdgeEast"/>
+            </keybind>" >> ~/.config/openbox/rc.xml
 
     elif [[ $vm = "a" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/5_awesome)
