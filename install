@@ -31,6 +31,7 @@ modprobe kvm-amd
 
 # make fish base shell
 sudo usermod --shell /bin/fish zen
+echo alias xterm 'sakura'
 
 # čeština
 echo cs_CZ.UTF-8 UTF-8 >> /etc/default/libc-locales
