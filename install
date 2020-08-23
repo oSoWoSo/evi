@@ -9,6 +9,7 @@ sudo xbps-install -Su
 sudo xbps-install -Sy $(cat INSTALL/1_repos)
 sudo xbps-install -Sy $(cat INSTALL/2_base)
 
+echo "$(tput setaf 1)						Which GPU you using?$(tput sgr 0)"
 read -p "nvidia (n) or ati (a) or qemu (q)[n/a/q] " -n 1 video
 echo
     if [[ $video = "n" ]]; then
@@ -51,8 +52,6 @@ echo alias xterm 'sakura' > ~/.config/fish/aliases.fish
 sudo nano /etc/default/libc-locales
 sudo xbps-reconfigure -f glibc-locales
 
-# guest addition
-sudo vpm i qemu-ga
 
 # creating bare repository
 cd ~/
