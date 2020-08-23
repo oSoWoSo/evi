@@ -18,10 +18,14 @@ read -p "NVIDIA (n) or AMD (a) or QEMU (q)[n/a/q] " -n 1 video
 echo
     if [[ $video = "n" ]]; then
         sudo xbps-install -S $(cat INSTALL/3_nvidia)
+        sudo nvidia-xconfig
+
     elif [[ $video = "q" ]]; then
         sudo xbps-install -S $(cat INSTALL/3_qemu)
+
     elif [[ $video = "a" ]]; then
         sudo xbps-install -S $(cat INSTALL/3_ati)
+
     else
     echo "Invalid option."
     exit 1
@@ -37,10 +41,13 @@ echo
     if [[ $vm = "o" ]]; then
         sudo xbps-install -S $(cat INSTALL/5_openbox)
         sudo -u zen obmenu-generator -p -i -u -d -c
+
     elif [[ $vm = "a" ]]; then
         sudo xbps-install -S $(cat INSTALL/5_awesome)
+
     elif [[ $vm = "s" ]]; then
         echo "$(tput setaf 1)						Install something else..$(tput sgr 0)"
+
     else
     echo "Invalid option."
     exit 1
@@ -65,13 +72,11 @@ echo alias xterm='sakura' >> ~/.bashrc
 sudo nano /etc/default/libc-locales
 sudo xbps-reconfigure -f glibc-locales
 
-
 # creating bare repository
 cd ~/
 mkdir .void
 cd .void
 git init --bare
-
 
 # Install services
 
