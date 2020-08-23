@@ -25,6 +25,22 @@ fi
 
 #sudo xbps-install -Sy $(cat INSTALL/3_nvidia)
 sudo xbps-install -Sy $(cat INSTALL/4_desktop)
+
+# Choose window manager
+echo "$(tput setaf 1)						Which windows manager you want use?$(tput sgr 0)"
+read -p "openbox (o) or awesome (a) or nothing (n)[o/a/n] " -n 1 vm
+echo
+    if [[ $vm = "o" ]]; then
+        sudo xbps-install -S $(cat INSTALL/5_openbox)
+    elif [[ $vm = "a" ]]; then
+        sudo xbps-install -S $(cat INSTALL/5_awesome)
+    elif [[ $vm = "n" ]]; then
+        echo "$(tput setaf 1)						Install something else..$(tput sgr 0)"
+    else
+    echo "Invalid option."
+    exit 1
+fi
+
 sudo xbps-install -Sy $(cat INSTALL/5_openbox)
 #sudo xbps-install -Sy $(cat INSTALL/6_media)
 #sudo xbps-install -Sy $(cat INSTALL/7_virtual)
