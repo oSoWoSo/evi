@@ -19,3 +19,4 @@ socklog-void
 cronie
 chrony
 elogind
+pkg-config
