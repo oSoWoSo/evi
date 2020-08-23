@@ -1,4 +1,7 @@
-#! /bin/bash
+#!/bin/bash
+# Void Linux post-install script
+
+echo "$(tput setaf 1)						Starting Void Linux post-install script$(tput sgr 0)"
 
 # Install packages
 
@@ -28,6 +31,10 @@ modprobe kvm-amd
 
 # make fish base shell
 sudo usermod --shell /bin/fish zen
+
+# čeština
+echo cs_CZ.UTF-8 UTF-8 >> /etc/default/libc-locales
+xbps-reconfigure -f glibc-locales
 
 # creating bare repository
 mkdir .void
