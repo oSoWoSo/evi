@@ -58,25 +58,7 @@ echo
             nitrogen --restore &
             volumeicon &
             conky &" >> ~/.config/openbox/autostart
-
-        echo "<!-- Window Tiling: Emulates Windows 7 Snap feature JASON CAVETT -->
-<keybind key="W-Left">
- <action name="UnmaximizeFull"/>
- <action name="MaximizeVert"/>
- <action name="MoveResizeTo">
-  <width>50%</width>
- </action>
- <action name="MoveToEdgeWest"/>
-</keybind>
-<keybind key="W-Right">
- <action name="UnmaximizeFull"/>
- <action name="MaximizeVert"/>
- <action name="MoveResizeTo">
-  <width>50%</width>
- </action>
- <action name="MoveToEdgeEast"/>
-</keybind>" >> ~/.config/openbox/rc.xml
-
+        cp ~/bin/dotfiles/home/zen/.config/openbox/rc.xml ~/.config/openbox
     elif [[ $vm = "a" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/5_awesome)
 
