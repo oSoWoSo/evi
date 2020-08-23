@@ -8,6 +8,20 @@ echo "$(tput setaf 1)						Starting Void Linux post-install script$(tput sgr 0)"
 sudo xbps-install -Su
 sudo xbps-install -Sy $(cat INSTALL/1_repos)
 sudo xbps-install -Sy $(cat INSTALL/2_base)
+
+read -p "nvidia (n) or ati (a) or qemu (q)[n/a/q] " -n 1 video
+echo
+    if [[ $video = "n" ]]; then
+        sudo xbps-install -Sy $(cat INSTALL/3_nvidia)
+    elif [[ $video = "q" ]]; then
+        sudo xbps-install -Sy $(cat INSTALL/3_qemu)
+    elif [[ $video = "a" ]]; then
+        sudo xbps-install -Sy $(cat INSTALL/3_ati)
+    else
+    echo "Invalid option."
+    exit 1
+fi
+
 #sudo xbps-install -Sy $(cat INSTALL/3_nvidia)
 sudo xbps-install -Sy $(cat INSTALL/4_desktop)
 sudo xbps-install -Sy $(cat INSTALL/5_openbox)
