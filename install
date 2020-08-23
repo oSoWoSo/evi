@@ -1,6 +1,7 @@
 #!/bin/bash
 # Void Linux post-install script
 echo "$(tput setaf 1)						Starting Void Linux post-install script$(tput sgr 0)"
+
 # Install packages
 sudo xbps-install -Su
 sudo xbps-install -Sy $(cat INSTALL/1_repos)
@@ -8,6 +9,7 @@ sudo xbps-install -Sy $(cat INSTALL/2_base)
 cd ~/bin
 git clone https://gitlab.com/awesome-void/awesomeVoid /dotfiles
 cd ~/bin/install
+
 # Choose gpu
 echo "$(tput setaf 1)						Which GPU you using?$(tput sgr 0)"
 read -p "NVIDIA (n) or AMD (a) or QEMU (q)[n/a/q] " -n 1 video
@@ -27,6 +29,7 @@ echo
     exit 1
 fi
 sudo xbps-install -Sy $(cat INSTALL/4_desktop)
+
 # Choose window manager
 echo "$(tput setaf 1)						Which windows manager you want use?$(tput sgr 0)"
 read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)          [o/a/n] " -n 1 vm
@@ -45,30 +48,40 @@ echo
     echo "Invalid option."
     exit 1
 fi
+
 #sudo xbps-install -Sy $(cat INSTALL/6_media)
 #sudo xbps-install -Sy $(cat INSTALL/7_virtual)
 #sudo xbps-install -Sy $(cat INSTALL/8_big)
 #sudo xbps-install -Sy $(cat INSTALL/)
 #sudo xbps-install -Sy $(cat INSTALL/)
+
 # nested virtualization AMD
 #modprobe kvm-amd
+
 # make fish base shell
 sudo usermod --shell /bin/fish zen
 echo ". ~/.config/fish/aliases.fish" >> ~/.config/fish/config.fish
 echo "alias xterm 'sakura'" >> ~/.config/fish/aliases.fish
 echo alias xterm='sakura' >> ~/.bashrc
+
 # čeština
 sudo nano /etc/default/libc-locales
 sudo xbps-reconfigure -f glibc-locales
+
 # creating bare repository
 mkdir ~/.void
 cd ~/.void
 git init --bare
+
 # Install services
 sudo ln -s /etc/sv/dbus /var/service
-sudo ln -s /etc/sv/acpid /var/service
-#sudo ln -s /etc/sv/dbus /var/service
-#sudo ln -s /etc/sv/dbus /var/service
+sudo ln -s /etc/sv/elogind /var/service
+#sudo ln -s /etc/sv/acpid /var/service
+sudo ln -s /etc/sv/socklog-unix /var/service
+sudo ln -s /etc/sv/nanoklogd /var/service
+sudo ln -s /etc/sv/crond /var/service
+sudo ln -s /etc/sv/chronyd /var/service
+
 read -p "Spustit lightdm nyní? ano (a) nebo ne (n)?          [a/n] " -n 1 lightdm
 echo
     if [[ $lightdm = "a" ]]; then

@@ -10,6 +10,7 @@ openbox
 obconf
 obmenu
 obmenu-generator
+oblogout
 tint2
 nitrogen
 plasma-workspace-wallpapers

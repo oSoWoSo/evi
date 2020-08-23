@@ -1,3 +1,9 @@
+acpid
+acpi_call-dkms
+acpi
+cpupower
+thelmald
+powertop
 dbus
 ntfs-3g
 bash-completion
@@ -9,3 +15,7 @@ vpm
 vsv
 nano
 lf
+socklog-void
+cronie
+chrony
+elogind
