@@ -8,6 +8,10 @@ sudo xbps-install -Su
 sudo xbps-install -Sy $(cat INSTALL/1_repos)
 sudo xbps-install -Sy $(cat INSTALL/2_base)
 
+cd ~/bin
+git clone https://gitlab.com/awesome-void/awesomeVoid /dotfiles
+cd ~/bin/install
+
 # Choose gpu
 echo "$(tput setaf 1)						Which GPU you using?$(tput sgr 0)"
 read -p "NVIDIA (n) or AMD (a) or QEMU (q)[n/a/q] " -n 1 video
@@ -32,6 +36,7 @@ read -p "openbox (o) or awesome (a) or nothing (n)[o/a/n] " -n 1 vm
 echo
     if [[ $vm = "o" ]]; then
         sudo xbps-install -S $(cat INSTALL/5_openbox)
+
     elif [[ $vm = "a" ]]; then
         sudo xbps-install -S $(cat INSTALL/5_awesome)
     elif [[ $vm = "n" ]]; then
@@ -67,8 +72,6 @@ cd ~/
 mkdir .void
 cd .void
 git init --bare
-cd ~/bin
-git clone https://gitlab.com/awesome-void/awesomeVoid /dotfiles
 
 
 # Install services
