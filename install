@@ -62,9 +62,8 @@ echo alias xterm='sakura' >> ~/.bashrc
 sudo nano /etc/default/libc-locales
 sudo xbps-reconfigure -f glibc-locales
 # creating bare repository
-cd ~/
-mkdir .void
-cd .void
+mkdir ~/.void
+cd ~/.void
 git init --bare
 # Install services
 sudo ln -s /etc/sv/dbus /var/service
