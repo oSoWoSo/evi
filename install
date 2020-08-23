@@ -78,4 +78,5 @@ echo
         sudo ln -s /etc/sv/lightdm /var/service
 
     elif [[ $lightdm = "n" ]]; then
+    else
 fi
