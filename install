@@ -39,6 +39,12 @@ echo
     if [[ $vm = "o" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/5_openbox)
         sudo -u $USER obmenu-generator -p -i -u -d -c
+        echo "autorandr common &
+            tint2 &
+            setxkbmap cz &
+            nitrogen --restore &
+            volumeicon &
+            conky &" >> ~/.config/openbox/autostart
 
     elif [[ $vm = "a" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/5_awesome)
