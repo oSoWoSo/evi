@@ -5,7 +5,7 @@ echo "$(tput setaf 1)						Starting Void Linux post-install script$(tput sgr 0)"
 # Install packages
 sudo xbps-install -Su
 sudo xbps-install -Sy $(cat INSTALL/1_repos)
-sudo xbps-install -Sy $(cat INSTALL/2_base)
+sudo xbps-install -S $(cat INSTALL/2_base)
 cd ~/bin
 git clone https://gitlab.com/awesome-void/awesomeVoid /dotfiles
 cd ~/bin/install
