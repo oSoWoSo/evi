@@ -37,6 +37,7 @@ echo cs_CZ.UTF-8 UTF-8 >> /etc/default/libc-locales
 xbps-reconfigure -f glibc-locales
 
 # creating bare repository
+cd ~/
 mkdir .void
 cd .void
 git init --bare

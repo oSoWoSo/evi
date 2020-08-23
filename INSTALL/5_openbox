@@ -12,8 +12,9 @@ obmenu
 obmenu-generator
 tint2
 nitrogen
-arc-theme
+plasma-workspace-wallpapers
+--arc-theme
 paper-gtk-theme
 paper-icon-theme
-plasma-workspace-wallpapers
+
 
