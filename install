@@ -26,8 +26,6 @@ echo
     elif [[ $video = "q" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/3_qemu)
 
-
-
     else
     echo "Invalid option. EXITING!"
     exit 1
