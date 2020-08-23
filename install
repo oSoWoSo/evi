@@ -5,7 +5,7 @@ echo "$(tput setaf 1)						Starting Void Linux post-install script$(tput sgr 0)"
 # Install packages
 sudo xbps-install -Su
 sudo xbps-install -Sy $(cat INSTALL/1_repos)
-sudo xbps-install -S $(cat INSTALL/2_base)
+sudo xbps-install -Sy $(cat INSTALL/2_base)
 
 git clone https://gitlab.com/awesome-void/awesomeVoid ~/bin/dotfiles
 
@@ -14,14 +14,14 @@ echo "$(tput setaf 1)						Which GPU you using?$(tput sgr 0)"
 read -p "NVIDIA (n) or AMD (a) or QEMU (q)[n/a/q] " -n 1 video
 echo
     if [[ $video = "n" ]]; then
-        sudo xbps-install -S $(cat INSTALL/3_nvidia)
+        sudo xbps-install -Sy $(cat INSTALL/3_nvidia)
         sudo nvidia-xconfig
 
     elif [[ $video = "q" ]]; then
-        sudo xbps-install -S $(cat INSTALL/3_qemu)
+        sudo xbps-install -Sy $(cat INSTALL/3_qemu)
 
     elif [[ $video = "a" ]]; then
-        sudo xbps-install -S $(cat INSTALL/3_ati)
+        sudo xbps-install -Sy $(cat INSTALL/3_ati)
 
     else
     echo "Invalid option. EXITING!"
@@ -34,11 +34,11 @@ echo "$(tput setaf 1)						Which windows manager you want use?$(tput sgr 0)"
 read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)          [o/a/n] " -n 1 vm
 echo
     if [[ $vm = "o" ]]; then
-        sudo xbps-install -S $(cat INSTALL/5_openbox)
-        sudo -u zen obmenu-generator -p -i -u -d -c
+        sudo xbps-install -Sy $(cat INSTALL/5_openbox)
+        sudo -u $USER obmenu-generator -p -i -u -d -c
 
     elif [[ $vm = "a" ]]; then
-        sudo xbps-install -S $(cat INSTALL/5_awesome)
+        sudo xbps-install -Sy $(cat INSTALL/5_awesome)
 
     elif [[ $vm = "s" ]]; then
         echo "$(tput setaf 1)						Install something else..$(tput sgr 0)"
