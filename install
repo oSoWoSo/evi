@@ -76,7 +76,7 @@ read -p "Spustit lightdm nyní? ano  nebo ne?          [a/n] " -n 1 lightdm
 echo
     if [[ $lightdm = "y" ]]; then
         sudo ln -s /etc/sv/lightdm /var/service
-
     elif [[ $lightdm = "n" ]]; then
+    echo "$(tput setaf 1)						Enjoy void linux$(tput sgr 0)"
     else
 fi
