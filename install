@@ -5,11 +5,16 @@
 sudo xbps-install -Su
 sudo xbps-install -S $(cat INSTALL/repos)
 sudo xbps-install -S $(cat INSTALL/base)
-sudo xbps-install -S $(cat INSTALL/drivers)
+sudo xbps-install -S $(cat INSTALL/nvidia)
 sudo xbps-install -S $(cat INSTALL/desktop)
+sudo xbps-install -S $(cat INSTALL/openbox)
 sudo xbps-install -S $(cat INSTALL/media)
 sudo xbps-install -S $(cat INSTALL/progs)
-sudo xbps-install -S $(cat INSTALL/game)
+sudo xbps-install -S $(cat INSTALL/virtual)
+sudo xbps-install -S $(cat INSTALL/big)
+#sudo xbps-install -S $(cat INSTALL/)
+#sudo xbps-install -S $(cat INSTALL/)
+
 
 # Install services
 
