@@ -8,12 +8,12 @@ echo "$(tput setaf 1)						Starting Void Linux post-install script$(tput sgr 0)"
 sudo xbps-install -Su
 sudo xbps-install -Sy $(cat INSTALL/1_repos)
 sudo xbps-install -Sy $(cat INSTALL/2_base)
-sudo xbps-install -Sy $(cat INSTALL/3_nvidia)
+#sudo xbps-install -Sy $(cat INSTALL/3_nvidia)
 sudo xbps-install -Sy $(cat INSTALL/4_desktop)
 sudo xbps-install -Sy $(cat INSTALL/5_openbox)
-sudo xbps-install -Sy $(cat INSTALL/6_media)
-sudo xbps-install -Sy $(cat INSTALL/7_virtual)
-sudo xbps-install -Sy $(cat INSTALL/8_big)
+#sudo xbps-install -Sy $(cat INSTALL/6_media)
+#sudo xbps-install -Sy $(cat INSTALL/7_virtual)
+#sudo xbps-install -Sy $(cat INSTALL/8_big)
 #sudo xbps-install -Sy $(cat INSTALL/)
 #sudo xbps-install -Sy $(cat INSTALL/)
 
@@ -27,7 +27,7 @@ sudo ln -s /etc/sv/acpid /var/service
 #sudo ln -s /etc/sv/dbus /var/service
 
 # nested virtualization AMD
-modprobe kvm-amd
+#modprobe kvm-amd
 
 # make fish base shell
 sudo usermod --shell /bin/fish zen
