@@ -70,11 +70,9 @@ sudo ln -s /etc/sv/dbus /var/service
 sudo ln -s /etc/sv/acpid /var/service
 #sudo ln -s /etc/sv/dbus /var/service
 #sudo ln -s /etc/sv/dbus /var/service
-# Choose window manager
-echo "$(tput setaf 1)						Which windows manager you want use?$(tput sgr 0)"
-read -p "Spustit lightdm nyní? ano  nebo ne?          [a/n] " -n 1 lightdm
+read -p "Spustit lightdm nyní? ano (a) nebo ne (n)?          [a/n] " -n 1 lightdm
 echo
-    if [[ $lightdm = "y" ]]; then
+    if [[ $lightdm = "a" ]]; then
         sudo ln -s /etc/sv/lightdm /var/service
     elif [[ $lightdm = "n" ]]; then
     echo "$(tput setaf 1)						Enjoy void linux$(tput sgr 0)"
