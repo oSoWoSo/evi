@@ -16,9 +16,11 @@ echo
     if [[ $video = "n" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/3_nvidia)
         sudo nvidia-xconfig
-
+        modprobe kvm-amd
+        
     elif [[ $video = "a" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/3_ati)
+        modprobe kvm-amd
 
     elif [[ $video = "i" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/3_intel)
