@@ -81,8 +81,8 @@ fi
 
 # make fish base shell
 sudo usermod --shell /bin/fish zen
-echo ". ~/.config/fish/aliases.fish" >> ~/.config/fish/config.fish
-echo "alias xterm 'sakura'" >> ~/.config/fish/aliases.fish
+#echo ". ~/.config/fish/aliases.fish" >> ~/.config/fish/config.fish
+#echo "alias xterm 'sakura'" >> ~/.config/fish/aliases.fish
 
 # socklog
 sudo usermod -a -G socklog $USER
