@@ -22,7 +22,7 @@ echo
         echo
             if [[ $pass = "y" ]]; then
             modprobe kvm-amd
-            ./INSTALL/pass.sh
+            sudo ./INSTALL/pass.sh
             elif [[ $pass = "n" ]]; then
             echo "continuing"
             else
