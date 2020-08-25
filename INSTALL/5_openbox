@@ -1,19 +1,12 @@
-xorg-minimal
-xorg-fonts
-lightdm-gtk-greeter-settings
 lxappearance
 lxtask
-xdg-utils
-polkit
-picom
 openbox
 obconf
 obmenu
 obmenu-generator
 oblogout
 tint2
-nitrogen
-plasma-workspace-wallpapers
+
 
 
 
