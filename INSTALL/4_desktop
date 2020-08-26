@@ -7,9 +7,10 @@ numlockx
 lightdm-gtk-greeter-settings
 lxtask
 xdg-utils
+xdg-desktop-portal-gtk
+xdg-user-dirs-gtk
 polkit
 picom
-nitrogen
 plasma-workspace-wallpapers
 octoxbps
 pcmanfm
@@ -23,4 +24,4 @@ pmount
 autorandr
 mesa-vaapi
 mesa-vdpau
-feh
+
