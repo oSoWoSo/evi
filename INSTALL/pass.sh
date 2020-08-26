@@ -1,7 +1,5 @@
 echo "$(tput setaf 1)						Installing VGA passthrough$(tput sgr 0)"
 echo "Edit grub: intel_iommu=on or amd_iommu=on rd.driver.pre=vfio-pci kvm.ignore_msrs=1" >> /etc/default/grub
-echo "Edit grub: intel_iommu=on or amd_iommu=on rd.driver.pre=vfio-pci kvm.ignore_msrs=1"
-sleep 5s
 micro /etc/default/grub
 echo "Updating grub"
 grub-mkconfig -o /boot/grub/grub.cfg

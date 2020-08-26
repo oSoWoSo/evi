@@ -22,6 +22,7 @@ echo
         echo
             if [[ $pass = "y" ]]; then
             modprobe kvm-amd
+            chmod +x /INSTALL/pass.sh
             sudo ./INSTALL/pass.sh
         fi
     elif [[ $video = "a" ]]; then
@@ -43,12 +44,13 @@ echo
     if [[ $vm = "o" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/5_openbox)
         sudo -u $USER obmenu-generator -p -i -u -d -c
-        echo "autorandr common &
-            tint2 &
-            setxkbmap cz &
-            nitrogen --restore &
-            volumeicon &
-            conky &" >> ~/.config/openbox/autostart
+echo
+"autorandr common &
+tint2 &
+setxkbmap cz &
+nitrogen --restore &
+volumeicon &
+conky &" >> ~/.config/openbox/autostart
 #        cp ~/bin/dotfiles/home/zen/.config/openbox/rc.xml ~/.config/openbox
     elif [[ $vm = "a" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/5_awesome)
