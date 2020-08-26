@@ -73,7 +73,13 @@ fi
 #sudo xbps-install -Sy $(cat INSTALL/6_media)
 #sudo xbps-install -Sy $(cat INSTALL/7_virtual)
 #sudo xbps-install -Sy $(cat INSTALL/8_big)
-#sudo xbps-install -Sy $(cat INSTALL/)
+echo "$(tput setaf 1)						Want install printer support?$(tput sgr 0)"
+read -p "NO (n) or YES (y)      [n/y] " -n 1 cups
+echo
+    if [[ $cups = "y" ]]; then
+        sudo xbps-install -Sy $(cat INSTALL/9_print)
+        fi
+    fi    
 #sudo xbps-install -Sy $(cat INSTALL/)
 
 # make fish base shell

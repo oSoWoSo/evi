@@ -2,6 +2,7 @@ acpid
 acpi_call-dkms
 acpi
 cpupower
+cpufrequtils
 thermald
 powertop
 dbus
@@ -21,3 +22,4 @@ chrony
 elogind
 pkg-config
 feh
+mime-types
