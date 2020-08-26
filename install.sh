@@ -90,6 +90,15 @@ mkdir ~/.void
 cd ~/.void
 git init --bare
 
+# Share packages with void devs-----------------------------------------------------------------------------------------
+echo "$(tput setaf 1)						Want share packages with void devs?$(tput sgr 0)"
+read -p "NO (n) or YES (y)      [n/y] " -n 1 pop
+echo
+    if [[ $pop = "y" ]]; then
+        sudo xbps-install -Sy popcorn
+        sudo ln -s /etc/sv/popcorn /var/service
+    fi 
+
 # Install services-----------------------------------------------------------------------------------------
 sudo ln -s /etc/sv/dbus /var/service
 sudo ln -s /etc/sv/elogind /var/service
@@ -106,5 +115,6 @@ echo
         sudo ln -s /etc/sv/lightdm /var/service
         echo "$(tput setaf 1)						Enjoy void linux$(tput sgr 0)"
     elif [[ $lightdm = "n" ]]; then
+    sudo ln -s /etc/sv/lightdm /etc/runit/runsvdir/default/
     echo "$(tput setaf 1)						Enjoy void linux$(tput sgr 0)"
 fi
