@@ -7,7 +7,9 @@ numlockx
 lightdm-gtk-greeter-settings
 lxtask
 xdg-utils
+xdg-desktop-portal
 xdg-desktop-portal-gtk
+xdg-user-dirs
 xdg-user-dirs-gtk
 polkit
 picom

@@ -2,7 +2,7 @@
 # Void Linux post-install script
 echo "$(tput setaf 1)						Starting Void Linux post-install script$(tput sgr 0)"
 
-# Install packages
+# Install packages-----------------------------------------------------------------------------------------
 sudo xbps-install -Su
 sudo xbps-install -Sy $(cat INSTALL/1_repos)
 sudo xbps-install -Sy $(cat INSTALL/2_base)
@@ -10,7 +10,7 @@ sudo xbps-install -Sy $(cat INSTALL/2_base)
 git config --global credential.helper store
 git clone https://gitlab.com/awesome-void/awesomeVoid ~/bin/dotfiles
 
-# Choose gpu
+# Choose gpu-----------------------------------------------------------------------------------------
 echo "$(tput setaf 1)						Which GPU you using?$(tput sgr 0)"
 read -p "NVIDIA (n), AMD (a), INTEL (i) or QEMU (q)      [n/a/i/q] " -n 1 video
 echo
@@ -36,9 +36,9 @@ echo
 fi
 sudo xbps-install -Sy $(cat INSTALL/4_desktop)
 
-# Choose window manager
+# Choose window manager-----------------------------------------------------------------------------------------
 echo "$(tput setaf 1)						Which windows manager you want use?$(tput sgr 0)"
-read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)          [o/a/n] " -n 1 vm
+read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)          [o/a/s] " -n 1 vm
 echo
     if [[ $vm = "o" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/5_openbox)
@@ -54,38 +54,41 @@ echo
         sudo xbps-install -Sy $(cat INSTALL/5_awesome)
 
     elif [[ $vm = "s" ]]; then
-        echo "$(tput setaf 1)						Install something else after..$(tput sgr 0)"
+        echo "$(tput setaf 1) Install something else after..$(tput sgr 0)"
 fi
 
 #sudo xbps-install -Sy $(cat INSTALL/6_media)
 #sudo xbps-install -Sy $(cat INSTALL/7_virtual)
 #sudo xbps-install -Sy $(cat INSTALL/8_big)
+
+# printer support-----------------------------------------------------------------------------------------
 echo "$(tput setaf 1)						Want install printer support?$(tput sgr 0)"
 read -p "NO (n) or YES (y)      [n/y] " -n 1 cups
 echo
     if [[ $cups = "y" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/9_print)
     fi    
+
 #sudo xbps-install -Sy $(cat INSTALL/)
 
-# make fish base shell
+# make fish base shell-----------------------------------------------------------------------------------------
 sudo usermod --shell /bin/fish zen
 #echo ". ~/.config/fish/aliases.fish" >> ~/.config/fish/config.fish
 #echo "alias xterm 'sakura'" >> ~/.config/fish/aliases.fish
 
-# socklog
+# socklog-----------------------------------------------------------------------------------------
 sudo usermod -a -G socklog $USER
 
-# čeština
+# čeština-----------------------------------------------------------------------------------------
 sudo micro /etc/default/libc-locales
 sudo xbps-reconfigure -f glibc-locales
 
-# creating bare repository
+# creating bare repository-----------------------------------------------------------------------------------------
 mkdir ~/.void
 cd ~/.void
 git init --bare
 
-# Install services
+# Install services-----------------------------------------------------------------------------------------
 sudo ln -s /etc/sv/dbus /var/service
 sudo ln -s /etc/sv/elogind /var/service
 #sudo ln -s /etc/sv/acpid /var/service
