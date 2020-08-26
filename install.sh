@@ -76,9 +76,6 @@ fi
 #sudo xbps-install -Sy $(cat INSTALL/)
 #sudo xbps-install -Sy $(cat INSTALL/)
 
-# nested virtualization AMD
-#modprobe kvm-amd
-
 # make fish base shell
 sudo usermod --shell /bin/fish zen
 #echo ". ~/.config/fish/aliases.fish" >> ~/.config/fish/config.fish
