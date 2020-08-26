@@ -99,9 +99,10 @@ sudo ln -s /etc/sv/nanoklogd /var/service
 sudo ln -s /etc/sv/crond /var/service
 sudo ln -s /etc/sv/chronyd /var/service
 
-read -p "Spustit lightdm nyní? ano (a) nebo ne (n)?          [a/n] " -n 1 lightdm
+echo "$(tput setaf 1)						Want run lightdm now?$(tput sgr 0)"
+read -p "Run lightdm now? YES (y) or NO (n)?          [y/n] " -n 1 lightdm
 echo
-    if [[ $lightdm = "a" ]]; then
+    if [[ $lightdm = "y" ]]; then
         sudo ln -s /etc/sv/lightdm /var/service
         echo "$(tput setaf 1)						Enjoy void linux$(tput sgr 0)"
     elif [[ $lightdm = "n" ]]; then
