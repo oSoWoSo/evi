@@ -23,11 +23,6 @@ echo
             if [[ $pass = "y" ]]; then
             modprobe kvm-amd
             sudo ./INSTALL/pass.sh
-            elif [[ $pass = "n" ]]; then
-            echo "continuing"
-            else
-            echo "Invalid option. EXITING!"
-            exit 1        
         fi
     elif [[ $video = "a" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/3_ati)
@@ -38,10 +33,6 @@ echo
 
     elif [[ $video = "q" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/3_qemu)
-
-    else
-    echo "Invalid option. EXITING!"
-    exit 1
 fi
 sudo xbps-install -Sy $(cat INSTALL/4_desktop)
 
@@ -63,11 +54,7 @@ echo
         sudo xbps-install -Sy $(cat INSTALL/5_awesome)
 
     elif [[ $vm = "s" ]]; then
-        echo "$(tput setaf 1)						Install something else..$(tput sgr 0)"
-
-    else
-    echo "Invalid option."
-    exit 1
+        echo "$(tput setaf 1)						Install something else after..$(tput sgr 0)"
 fi
 
 #sudo xbps-install -Sy $(cat INSTALL/6_media)
@@ -78,7 +65,6 @@ read -p "NO (n) or YES (y)      [n/y] " -n 1 cups
 echo
     if [[ $cups = "y" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/9_print)
-        fi
     fi    
 #sudo xbps-install -Sy $(cat INSTALL/)
 
@@ -112,9 +98,7 @@ read -p "Spustit lightdm nyní? ano (a) nebo ne (n)?          [a/n] " -n 1 light
 echo
     if [[ $lightdm = "a" ]]; then
         sudo ln -s /etc/sv/lightdm /var/service
+        echo "$(tput setaf 1)						Enjoy void linux$(tput sgr 0)"
     elif [[ $lightdm = "n" ]]; then
     echo "$(tput setaf 1)						Enjoy void linux$(tput sgr 0)"
-    else
-    echo "Invalid option. EXITING!"
-    exit 1  
 fi
