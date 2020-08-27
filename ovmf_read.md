@@ -1,3 +1,7 @@
+It's already extracted here so you dont need do it manually..
+
+But never version you must get yourself from link below...
+
 it is not in xbps so need to manually download from https://www.kraxel.org/repos/jenkins/edk2/ as of the writing of this build. Download the ovmf appropriate either 32 or 64 bit version then use
 
 install rpmextract package xbps

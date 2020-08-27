@@ -22,6 +22,7 @@ echo
         echo
             if [[ $pass = "y" ]]; then
             modprobe kvm-amd
+            sudo cp -r /OVMF/ /usr/share/ovmf
             chmod +x /INSTALL/pass.sh
             sudo ./INSTALL/pass.sh
         fi
