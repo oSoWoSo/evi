@@ -5,8 +5,7 @@ WORK IN PROGRESS!!
 possible options
 
 Nvidia Qemu Amd Intel
-pci passthrough or no
-awesome openbox or nothing
-printer or not
-popcorn or not
-
+passthrough
+awesome openbox
+printer
+popcorn
