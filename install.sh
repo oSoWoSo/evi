@@ -8,7 +8,7 @@ sudo xbps-install -Sy $(cat INSTALL/1_repos)
 sudo xbps-install -Sy $(cat INSTALL/2_base)
 
 git config --global credential.helper store
-git clone https://gitlab.com/awesome-void/awesomeVoid ~/bin/dotfiles
+#git clone https://gitlab.com/awesome-void/awesomeVoid ~/bin/dotfiles
 
 # Choose gpu-----------------------------------------------------------------------------------------
 echo "$(tput setaf 1)						Which GPU you using?$(tput sgr 0)"
