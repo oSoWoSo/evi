@@ -69,6 +69,7 @@ read -p "NO (n) or YES (y)      [n/y] " -n 1 cups
 echo
     if [[ $cups = "y" ]]; then
         sudo xbps-install -Sy $(cat INSTALL/9_print)
+        sudo ln -s /etc/sv/cupsd /var/service
     fi    
 
 #sudo xbps-install -Sy $(cat INSTALL/)
