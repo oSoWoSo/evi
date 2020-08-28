@@ -219,8 +219,8 @@ if [[ $wm = "o" ]]; then
 	else
 		sudo touch /etc/sv/lightdm/down
 		sudo ln -s /etc/sv/lightdm /var/service/
-    	echo "$(tput setaf 1)Remove down file after for run Lightdm..$(tput sgr 0)"
-		echo "$(tput setaf 1)Use 'sudo rm /etc/sv/lightdm/down'$(tput sgr 0)"
+    	echo "$(tput setaf 3)Remove down file after for run Lightdm..$(tput sgr 0)"
+		echo "$(tput setaf 3)Use 'sudo rm /etc/sv/lightdm/down'$(tput sgr 0)"
 	fi
 elif [[ $wm = "a" ]]; then
 	echo "$(tput setaf 1)Do you want to run lightdm now?$(tput sgr 0)"
@@ -232,8 +232,8 @@ elif [[ $wm = "a" ]]; then
 	else
 		sudo touch /etc/sv/lightdm/down
 		sudo ln -s /etc/sv/lightdm /var/service/
-    	echo "$(tput setaf 1)Remove down file after for run Lightdm..$(tput sgr 0)"
-		echo "$(tput setaf 1)Use 'sudo rm /etc/sv/lightdm/down'$(tput sgr 0)"
+    	echo "$(tput setaf 3)Remove down file after for run Lightdm..$(tput sgr 0)"
+		echo "$(tput setaf 3)Use 'sudo rm /etc/sv/lightdm/down'$(tput sgr 0)"
 	fi
 fi	
 echo "$(tput setaf 1)Do you want to restart your computer now?$(tput sgr 0)"
