@@ -187,11 +187,10 @@ if [[ $vm = "o" ]]; then
 	else
 		sudo touch /etc/sv/lightdm/down
 		sudo ln -s /etc/sv/lightdm /var/service/
-    	sudo rm /etc/sv/lightdm/down
-		echo "$(tput setaf 1)Remove down file after for run Lightdm..$(tput sgr 0)"
+    	echo "$(tput setaf 1)Remove down file after for run Lightdm..$(tput sgr 0)"
 		echo "$(tput setaf 1)Use 'sudo rm /etc/sv/lightdm/down'$(tput sgr 0)"
 	fi
-if [[ $vm = "a" ]]; then
+elif [[ $vm = "a" ]]; then
 	echo "$(tput setaf 1)Do you want to run lightdm now?$(tput sgr 0)"
 	read -p "Run lightdm now? YES (y) or NO (n)?          [y/n] " -n 1 lightdm
 	echo
@@ -205,11 +204,10 @@ if [[ $vm = "a" ]]; then
 		echo "$(tput setaf 1)Use 'sudo rm /etc/sv/lightdm/down'$(tput sgr 0)"
 	fi
 fi	
-echo
 read -p "Do you want to restart your computer now? YES (y) or NO (n)?	[y/n] " -n 1 reboot
 echo
-if [[ $reboot = "y" ]]; then
-	sudo reboot
+if [[ $reboot = "n" ]]; then
+	echo "$(tput setaf 3)Enjoy void linux$(tput sgr 0)"
 else
-    echo "$(tput setaf 3)Enjoy void linux$(tput sgr 0)"
+    sudo reboot
 fi
