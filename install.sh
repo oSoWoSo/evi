@@ -25,17 +25,6 @@ echo "$(tput setaf 1)Do you want to share package statistics with void devs?$(tp
 read -p "NO (n) or YES (y)	[n/y] " -n 1 pop
 echo
 
-# Prerequisities -----------------------------------------------------------------------------------------
-# Freshly installed base system
-# Script will inastall rest..
-# git
-# And clone this repository
-
-sudo xbps-install -Sy git
-mkdir ~/bin
-git clone https://gitlab.com/awesome-void/install ~/bin/install
-cd ~/bin/install
-
 # Install packages -----------------------------------------------------------------------------------------
 # Nonfree and multilib repos
 sudo xbps-install -y $(cat INSTALL/1_repos)
