@@ -4,8 +4,11 @@ WORK IN PROGRESS!!
 
 possible options
 
-Nvidia Qemu Amd Intel
-passthrough
-awesome openbox
-printer
-popcorn
+ Nvidia Qemu Amd Intel
+ passthrough
+ awesome openbox
+ printer
+ popcorn
+
+TODO:
+
