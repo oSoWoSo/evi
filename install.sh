@@ -199,8 +199,7 @@ elif [[ $vm = "a" ]]; then
 	else
 		sudo touch /etc/sv/lightdm/down
 		sudo ln -s /etc/sv/lightdm /var/service/
-    	sudo rm /etc/sv/lightdm/down
-		echo "$(tput setaf 1)Remove down file after for run Lightdm..$(tput sgr 0)"
+    	echo "$(tput setaf 1)Remove down file after for run Lightdm..$(tput sgr 0)"
 		echo "$(tput setaf 1)Use 'sudo rm /etc/sv/lightdm/down'$(tput sgr 0)"
 	fi
 fi	
