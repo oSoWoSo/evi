@@ -1,7 +1,7 @@
 #!/bin/bash
 # Void Linux post-install script
 echo "$(tput setaf 3)Starting Void Linux post-install script$(tput sgr 0)"
-ls -al | tee installed.txt
+
 # Ask part
 echo "$(tput setaf 1)Which CPU do you use?$(tput sgr 0)"
 read -p "AMD (a) or INTEL (i)	[a/i] " -n 1 cpu
