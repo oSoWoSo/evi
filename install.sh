@@ -151,6 +151,7 @@ sudo xbps-install -Sy $(cat INSTALL/6_media)
 
 # make fish base shell-----------------------------------------------------------------------------------------
 sudo usermod --shell /bin/fish $USER
+export TERMINAL=sakura
 #echo ". ~/.config/fish/aliases.fish" >> ~/.config/fish/config.fish
 #echo "alias xterm 'sakura'" >> ~/.config/fish/aliases.fish
 
