@@ -206,8 +206,9 @@ elif [[ $vm = "a" ]]; then
 fi	
 echo "$(tput setaf 1)Do you want to restart your computer now?$(tput sgr 0)"
 read -p "Restart now? YES (y) or NO (n)?	[y/n] " -n 1 reboot
+echo
 if [[ $reboot = "n" ]]; then
-echo "$(tput setaf 3)Enjoy void linux$(tput sgr 0)"
+	echo "$(tput setaf 3)Enjoy void linux$(tput sgr 0)"
 else
     sudo reboot
 fi
