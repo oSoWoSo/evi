@@ -2,43 +2,48 @@
 # Void Linux post-install script
 echo "$(tput setaf 3)Starting Void Linux post-install script$(tput sgr 0)"
 
+# Default Answers
+cpu="${cpu:-a}"
+video="${video:-q}"
+pass="${pass:-n}"
+wm="${wm:-a}"
+editor="${editor:-m}"
+cups="${cups:-y}"
+pop="${pop:-y}"
+lightdm="${lightdm:-y}"
+reboot="${reboot:-n}"
+
 # Ask part
 echo "$(tput setaf 1)Which CPU do you use?$(tput sgr 0)"
-DEFAULT="a"
 read -p "AMD (a) or INTEL (i)	[A/i]" -n 1 cpu
 echo
 echo "$(tput setaf 1)Which GPU do you use?$(tput sgr 0)"
-DEFAULT="q"
 read -p "NVIDIA (n), AMD (a), INTEL (i) or QEMU (q)	[n/a/i/Q] " -n 1 video
 echo
 if [[ $video = "n" ]]; then
 	echo "$(tput setaf 1)Do you want to install PCI passthrough?$(tput sgr 0)"
-	DEFAULT="n"
 	read -p "NO (n) or YES (y)	[N/y]" -n 1 pass
+	echo
 elif [[ $video = "a" ]]; then
 	echo "$(tput setaf 1)Do you want to install PCI passthrough?$(tput sgr 0)"
-	DEFAULT="n"
 	read -p "NO (n) or YES (y)	[N/y]" -n 1 pass
+	echo
 elif [[ $video = "i" ]]; then
 	echo "$(tput setaf 1)Do you want to install PCI passthrough?$(tput sgr 0)"
-	DEFAULT="n"
 	read -p "NO (n) or YES (y)	[N/y]" -n 1 pass
+	echo
 fi	
 echo
 echo "$(tput setaf 1)Which window manager do you want to use?$(tput sgr 0)"
-DEFAULT="a"
-read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)	[o/A/s]" -n 1 vm
+read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)	[o/A/s]" -n 1 wm
 echo
 echo "$(tput setaf 1)Which test editor do you want to use?$(tput sgr 0)"
-DEFAULT="m"
 read -p "NANO (n) or MICRO (m) or VIM (v)	[n/M/v]" -n 1 editor
 echo
 echo "$(tput setaf 1)Do you want to install printer support?$(tput sgr 0)"
-DEFAULT="y"
 read -p "NO (n) or YES (y)	[n/Y]" -n 1 cups
 echo
 echo "$(tput setaf 1)Do you want to share package statistics with void devs?$(tput sgr 0)"
-DEFAULT="y"
 read -p "NO (n) or YES (y)	[n/Y]" -n 1 pop
 echo
 
@@ -130,7 +135,7 @@ elif [[ $cpu = "i" ]]; then
 	fi
 fi
 # Choose window manager -----------------------------------------------------------------------------------------
-    if [[ $vm = "o" ]]; then
+    if [[ $wm = "o" ]]; then
         sudo xbps-install -y $(cat INSTALL/4_desktop)
         sudo xbps-install -y $(cat INSTALL/5_openbox)
         -n 1 desk
@@ -142,7 +147,7 @@ fi
 		volumeicon &
 		conky &" >> ~/.config/openbox/autostart
 #        cp ~/bin/dotfiles/home/zen/.config/openbox/rc.xml ~/.config/openbox
-    elif [[ $vm = "a" ]]; then
+    elif [[ $wm = "a" ]]; then
 		echo awesome
         sudo xbps-install -y $(cat INSTALL/4_desktop)
         sudo xbps-install -y $(cat INSTALL/5_awesome)
@@ -195,9 +200,8 @@ sudo ln -s /etc/sv/nanoklogd /var/service/
 sudo ln -s /etc/sv/crond /var/service/
 sudo ln -s /etc/sv/chronyd /var/service/
 
-if [[ $vm = "o" ]]; then
+if [[ $wm = "o" ]]; then
 	echo "$(tput setaf 1)Do you want to run lightdm now?$(tput sgr 0)"
-	DEFAULT="y"
 	read -p "Run lightdm now? NO (n) or YES (y)	[n/Y]" -n 1 lightdm
 	echo
 	if [[ $lightdm = "y" ]]; then
@@ -208,9 +212,8 @@ if [[ $vm = "o" ]]; then
     	echo "$(tput setaf 1)Remove down file after for run Lightdm..$(tput sgr 0)"
 		echo "$(tput setaf 1)Use 'sudo rm /etc/sv/lightdm/down'$(tput sgr 0)"
 	fi
-elif [[ $vm = "a" ]]; then
+elif [[ $wm = "a" ]]; then
 	echo "$(tput setaf 1)Do you want to run lightdm now?$(tput sgr 0)"
-	DEFAULT="y"
 	read -p "Run lightdm now? NO (n) or YES (y)	[n/Y]" -n 1 lightdm
 	echo
 	if [[ $lightdm = "y" ]]; then
@@ -223,7 +226,6 @@ elif [[ $vm = "a" ]]; then
 	fi
 fi	
 echo "$(tput setaf 1)Do you want to restart your computer now?$(tput sgr 0)"
-DEFAULT="n"
 read -p "Restart now? NO (n) or YES (y)	[N/y]" -n 1 reboot
 echo
 if [[ $reboot = "n" ]]; then
