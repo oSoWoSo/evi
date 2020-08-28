@@ -200,6 +200,6 @@ read -p "Do you want to restart your computer now? YES (y) or NO (n)?	[y/n] " -n
 echo
 if [[ $restart = "y" ]]; then
 	sudo reboot
-else
+	else
     echo "$(tput setaf 3)Enjoy void linux$(tput sgr 0)"
 fi
