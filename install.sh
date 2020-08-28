@@ -80,7 +80,7 @@ elif [[ $editor = "v" ]]; then
 	echo EDITOR=vim > ~/.bashrc
 fi
 
-# Choose cpu -----------------------------------------------------------------------------------------
+# Choose CPU, GPU, pasthrough -----------------------------------------------------------------------------------------
 if [[ $cpu = "a" ]]; then
 	if [[ $video = "n" ]]; then
 		sudo xbps-install -y $(cat INSTALL/3_nvidia)
