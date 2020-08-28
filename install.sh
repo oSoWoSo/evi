@@ -9,8 +9,16 @@ echo
 echo "$(tput setaf 1)Which GPU do you use?$(tput sgr 0)"
 read -p "NVIDIA (n), AMD (a), INTEL (i) or QEMU (q)	[n/a/i/q] " -n 1 video
 echo
-echo "$(tput setaf 1)Do you want to install PCI passthrough?$(tput sgr 0)"
-read -p "NO (n) or YES (y)	[n/y] " -n 1 pass
+if [[ $video = "n" ]]; then
+	echo "$(tput setaf 1)Do you want to install PCI passthrough?$(tput sgr 0)"
+	read -p "NO (n) or YES (y)	[n/y] " -n 1 pass
+elif [[ $video = "a" ]]; then
+	echo "$(tput setaf 1)Do you want to install PCI passthrough?$(tput sgr 0)"
+	read -p "NO (n) or YES (y)	[n/y] " -n 1 pass
+elif [[ $video = "i" ]]; then
+	echo "$(tput setaf 1)Do you want to install PCI passthrough?$(tput sgr 0)"
+	read -p "NO (n) or YES (y)	[n/y] " -n 1 pass
+fi	
 echo
 echo "$(tput setaf 1)Which window manager do you want to use?$(tput sgr 0)"
 read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)	[o/a/s] " -n 1 vm
