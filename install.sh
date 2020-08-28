@@ -47,99 +47,70 @@ sudo xbps-install -Sy $(cat INSTALL/2_base)
 #git clone https://gitlab.com/awesome-void/awesomeVoid ~/bin/dotfiles
 
 # Choose cpu-----------------------------------------------------------------------------------------
-    if [[ $cpu = "a" ]]; then
-		echo amd
-		if [[ $video = "n" ]]; then
-		echo amd nvidia
+if [[ $cpu = "a" ]]; then
+	echo amd CPU
+	if [[ $video = "n" ]]; then
 		sudo xbps-install -y $(cat INSTALL/3_nvidia)
-        sudo nvidia-xconfig
-			if [[ $pass = "y" ]]; then
-			echo amd nvidia yes
+    	sudo nvidia-xconfig
+		if [[ $pass = "y" ]]; then
 			modprobe kvm-amd
 			sudo cp -r OVMF /usr/share/ovmf
 			chmod +x INSTALL/pass.sh
 			sudo ./INSTALL/pass.sh
-			fi
-		elif [[ $video = "a" ]]; then	
-			echo amd amd
-			if [[ $pass = "y" ]]; then
-			echo amd amd yes
+		fi
+	elif [[ $video = "a" ]]; then	
+		sudo xbps-install -y $(cat INSTALL/3_ati)
+		if [[ $pass = "y" ]]; then
 			modprobe kvm-amd
 			sudo cp -r OVMF /usr/share/ovmf
 			chmod +x INSTALL/pass.sh
 			sudo ./INSTALL/pass.sh
-			fi
-        elif [[ $video = "i" ]]; then	
-			echo amd intel
-			if [[ $pass = "y" ]]; then
-			echo amd intel yes
+		fi
+	elif [[ $video = "i" ]]; then	
+		sudo xbps-install -y $(cat INSTALL/3_intel)
+		if [[ $pass = "y" ]]; then
 			modprobe kvm-amd
 			sudo cp -r OVMF /usr/share/ovmf
 			chmod +x INSTALL/pass.sh
 			sudo ./INSTALL/pass.sh
-			fi
-		elif [[ $video = "q" ]]; then
-			echo amd qemu
-			sudo xbps-install -y $(cat INSTALL/3_qemu)
-		  fi
-		     
-    elif [[ $cpu = "i" ]]; then
-		echo intel
-		if [[ $video = "n" ]]; then
-		echo intel nvidia
+		fi
+	elif [[ $video = "q" ]]; then
+		sudo xbps-install -y $(cat INSTALL/3_qemu)
+	fi
+elif [[ $cpu = "i" ]]; then
+	echo intel CPU
+	if [[ $video = "n" ]]; then
 		sudo xbps-install -y $(cat INSTALL/3_nvidia)
-        sudo nvidia-xconfig
-			if [[ $pass = "y" ]]; then
+    	sudo nvidia-xconfig
+		if [[ $pass = "y" ]]; then
 			echo intel nvidia yes
 			modprobe kvm-intel
 			sudo cp -r OVMF /usr/share/ovmf
 			chmod +x INSTALL/pass.sh
 			sudo ./INSTALL/pass.sh
-			fi
-		elif [[ $video = "a" ]]; then	
-			echo intel amd
-			if [[ $pass = "y" ]]; then
+		fi
+	elif [[ $video = "a" ]]; then	
+		sudo xbps-install -y $(cat INSTALL/3_ati)
+		if [[ $pass = "y" ]]; then
 			echo intel amd yes
 			modprobe kvm-intel
 			sudo cp -r OVMF /usr/share/ovmf
 			chmod +x INSTALL/pass.sh
 			sudo ./INSTALL/pass.sh
-			fi
-        elif [[ $video = "i" ]]; then	
-			echo intel intel
-			if [[ $pass = "y" ]]; then
+		fi
+    elif [[ $video = "i" ]]; then	
+		sudo xbps-install -y $(cat INSTALL/3_intel)
+		if [[ $pass = "y" ]]; then
 			echo intel intel yes
 			modprobe kvm-intel
 			sudo cp -r OVMF /usr/share/ovmf
 			chmod +x INSTALL/pass.sh
 			sudo ./INSTALL/pass.sh
-			fi
-		elif [[ $video = "q" ]]; then
-			echo intel qemu
-#			sudo xbps-install -y $(cat INSTALL/3_qemu)
-		  fi
+		fi
+	elif [[ $video = "q" ]]; then
+		sudo xbps-install -y $(cat INSTALL/3_qemu)
+	fi
 fi
-
-# Choose gpu-----------------------------------------------------------------------------------------
-#    if [[ $video = "n" ]]; then
-#        sudo xbps-install -y $(cat INSTALL/3_nvidia)
-#        sudo nvidia-xconfig
-#            if [[ $pass = "y" ]]; then
-#            modprobe kvm-amd
-#            sudo cp -r /OVMF /usr/share/ovmf
-#            chmod +x /INSTALL/pass.sh
-#            sudo ./INSTALL/pass.sh
-#        fi
-#    elif [[ $video = "a" ]]; then
-#        sudo xbps-install -y $(cat INSTALL/3_ati)
-#        modprobe kvm-amd
-#    elif [[ $video = "i" ]]; then
-#        sudo xbps-install -y $(cat INSTALL/3_intel)
-#
-#    elif [[ $video = "q" ]]; then
-#        sudo xbps-install -y $(cat INSTALL/3_qemu)
-#fi
-
 # Choose window manager-----------------------------------------------------------------------------------------
     if [[ $vm = "o" ]]; then
         sudo xbps-install -y $(cat INSTALL/4_desktop)
@@ -186,10 +157,10 @@ cd ~/.void
 git init --bare
 
 # Share packages with void devs-----------------------------------------------------------------------------------------
-    if [[ $pop = "y" ]]; then
-        sudo xbps-install -y PopCorn
-        sudo ln -s /etc/sv/popcorn /var/service/
-    fi 
+if [[ $pop = "y" ]]; then
+    sudo xbps-install -y PopCorn
+    sudo ln -s /etc/sv/popcorn /var/service/
+fi 
 
 # Install services-----------------------------------------------------------------------------------------
 sudo ln -s /etc/sv/dbus /var/service/
@@ -203,8 +174,17 @@ sudo ln -s /etc/sv/chronyd /var/service/
 echo "$(tput setaf 1)						Do you want to run lightdm now?$(tput sgr 0)"
 read -p "Run lightdm now? YES (y) or NO (n)?          [y/n] " -n 1 lightdm
 echo
-    if [[ $lightdm = "y" ]]; then
-        sudo ln -s /etc/sv/lightdm /var/service/
-        echo "$(tput setaf 1)						Enjoy void linux$(tput sgr 0)"
+if [[ $lightdm = "y" ]]; then
+    sudo ln -s /etc/sv/lightdm /var/service/
+else
+	sudo touch /etc/sv/lightdm/down
+	sudo ln -s /etc/sv/lightdm /var/service/
+    echo "$(tput setaf 1)	Remove down file after for run Lightdm..$(tput sgr 0)"
+	echo "$(tput setaf 1)	Use	'sudo rm /etc/sv/lightdm/down'$(tput sgr 0)"
 fi
-#sudo restart
+read -p "Do you want to restart computer now? YES (y) or NO (n)?	[y/n] " -n 1 restart
+echo
+if [[ $restart = "y" ]]; then
+	sudo restart
+else
+    echo "$(tput setaf 1)						Enjoy void linux$(tput sgr 0)"
