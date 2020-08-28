@@ -4,33 +4,42 @@ echo "$(tput setaf 3)Starting Void Linux post-install script$(tput sgr 0)"
 
 # Ask part
 echo "$(tput setaf 1)Which CPU do you use?$(tput sgr 0)"
-read -p "AMD (a) or INTEL (i)	[a/i] " -n 1 cpu
+DEFAULT="a"
+read -p "AMD (a) or INTEL (i)	[A/i]" -n 1 cpu
 echo
 echo "$(tput setaf 1)Which GPU do you use?$(tput sgr 0)"
-read -p "NVIDIA (n), AMD (a), INTEL (i) or QEMU (q)	[n/a/i/q] " -n 1 video
+DEFAULT="q"
+read -p "NVIDIA (n), AMD (a), INTEL (i) or QEMU (q)	[n/a/i/Q] " -n 1 video
 echo
 if [[ $video = "n" ]]; then
 	echo "$(tput setaf 1)Do you want to install PCI passthrough?$(tput sgr 0)"
-	read -p "NO (n) or YES (y)	[n/y] " -n 1 pass
+	DEFAULT="n"
+	read -p "NO (n) or YES (y)	[N/y]" -n 1 pass
 elif [[ $video = "a" ]]; then
 	echo "$(tput setaf 1)Do you want to install PCI passthrough?$(tput sgr 0)"
-	read -p "NO (n) or YES (y)	[n/y] " -n 1 pass
+	DEFAULT="n"
+	read -p "NO (n) or YES (y)	[N/y]" -n 1 pass
 elif [[ $video = "i" ]]; then
 	echo "$(tput setaf 1)Do you want to install PCI passthrough?$(tput sgr 0)"
-	read -p "NO (n) or YES (y)	[n/y] " -n 1 pass
+	DEFAULT="n"
+	read -p "NO (n) or YES (y)	[N/y]" -n 1 pass
 fi	
 echo
 echo "$(tput setaf 1)Which window manager do you want to use?$(tput sgr 0)"
-read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)	[o/a/s] " -n 1 vm
+DEFAULT="a"
+read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)	[o/A/s]" -n 1 vm
 echo
 echo "$(tput setaf 1)Which test editor do you want to use?$(tput sgr 0)"
-read -p "NANO (n) or MICRO (m) or VI (v)	[n/m/v] " -n 1 editor
+DEFAULT="m"
+read -p "NANO (n) or MICRO (m) or VI (v)	[n/M/v]" -n 1 editor
 echo
 echo "$(tput setaf 1)Do you want to install printer support?$(tput sgr 0)"
-read -p "NO (n) or YES (y)	[n/y] " -n 1 cups
+DEFAULT="y"
+read -p "NO (n) or YES (y)	[n/Y]" -n 1 cups
 echo
 echo "$(tput setaf 1)Do you want to share package statistics with void devs?$(tput sgr 0)"
-read -p "NO (n) or YES (y)	[n/y] " -n 1 pop
+DEFAULT="y"
+read -p "NO (n) or YES (y)	[n/Y]" -n 1 pop
 echo
 
 # Install packages -----------------------------------------------------------------------------------------
@@ -52,7 +61,7 @@ elif [[ $editor = "m" ]]; then
 	sudo xbps-install -y micro
 	export EDITOR=micro
 	echo EDITOR=micro > ~/.bashrc
-elif [[ $editor = "m" ]]; then
+elif [[ $editor = "v" ]]; then
 	export EDITOR=vi
 	echo EDITOR=vi > ~/.bashrc
 fi
@@ -188,7 +197,8 @@ sudo ln -s /etc/sv/chronyd /var/service/
 
 if [[ $vm = "o" ]]; then
 	echo "$(tput setaf 1)Do you want to run lightdm now?$(tput sgr 0)"
-	read -p "Run lightdm now? YES (y) or NO (n)?          [y/n] " -n 1 lightdm
+	DEFAULT="y"
+	read -p "Run lightdm now? NO (n) or YES (y)	[n/Y]" -n 1 lightdm
 	echo
 	if [[ $lightdm = "y" ]]; then
     	sudo ln -s /etc/sv/lightdm /var/service/
@@ -200,7 +210,8 @@ if [[ $vm = "o" ]]; then
 	fi
 elif [[ $vm = "a" ]]; then
 	echo "$(tput setaf 1)Do you want to run lightdm now?$(tput sgr 0)"
-	read -p "Run lightdm now? YES (y) or NO (n)?          [y/n] " -n 1 lightdm
+	DEFAULT="y"
+	read -p "Run lightdm now? NO (n) or YES (y)	[n/Y]" -n 1 lightdm
 	echo
 	if [[ $lightdm = "y" ]]; then
     	sudo ln -s /etc/sv/lightdm /var/service/
@@ -212,7 +223,8 @@ elif [[ $vm = "a" ]]; then
 	fi
 fi	
 echo "$(tput setaf 1)Do you want to restart your computer now?$(tput sgr 0)"
-read -p "Restart now? YES (y) or NO (n)?	[y/n] " -n 1 reboot
+DEFAULT="n"
+read -p "Restart now? NO (n) or YES (y)	[N/y]" -n 1 reboot
 echo
 if [[ $reboot = "n" ]]; then
 	echo "$(tput setaf 3)Enjoy void linux$(tput sgr 0)"
