@@ -131,7 +131,7 @@ echo "$(tput setaf 1)						Do you want to share package statistics with void dev
 read -p "NO (n) or YES (y)      [n/y] " -n 1 pop
 echo
     if [[ $pop = "y" ]]; then
-        sudo xbps-install -y popcorn
+        sudo xbps-install -y PopCorn
         sudo ln -s /etc/sv/popcorn /var/service
     fi 
 
