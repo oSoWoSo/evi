@@ -23,27 +23,26 @@ sudo xbps-install -Sy $(cat INSTALL/2_base)
 #git clone https://gitlab.com/awesome-void/awesomeVoid ~/bin/dotfiles
 
 # Choose cpu-----------------------------------------------------------------------------------------
-echo "$(tput setaf 1)						Which CPU do you use?$(tput sgr 0)"
-read -p "AMD (a) or INTEL (i)     [a/i] " -n 1 cpu
-echo
-    if [[ $cpu = "a" ]]; then
-        sudo xbps-install -y $(cat INSTALL/3_nvidia)
-        sudo nvidia-xconfig
-        
-        read -p "Do you want to install PCI passthrough? NO (n) or YES (y)      [n/y] " -n 1 pass
-        echo
-            if [[ $pass = "y" ]]; then
-                if [[ $cpu = "a" ]]; then
-                    modprobe kvm-amd
-                if [[ $cpu = "i" ]]; then
-                    modprobe kvm-intel
-                fi
-                then
-                    sudo cp -r /OVMF/ /usr/share/ovmf
-                    chmod +x /INSTALL/pass.sh
-                    sudo ./INSTALL/pass.sh
-            fi
-
+#echo "$(tput setaf 1)						Which CPU do you use?$(tput sgr 0)"
+#read -p "AMD (a) or INTEL (i)     [a/i] " -n 1 cpu
+#echo
+#    if [[ $cpu = "a" ]]; then
+#        sudo xbps-install -y $(cat INSTALL/3_nvidia)
+#        sudo nvidia-xconfig
+#    elif [[ $cpu = "i" ]]; then    
+#        read -p "Do you want to install PCI passthrough? NO (n) or YES (y)      [n/y] " -n 1 pass
+#        echo
+#            if [[ $pass = "y" ]]; then
+#                if [[ $cpu = "a" ]]; then
+#                    modprobe kvm-amd
+#                if [[ $cpu = "i" ]]; then
+#                    modprobe kvm-intel
+#                fi
+#                    sudo cp -r /OVMF/ /usr/share/ovmf
+#                    chmod +x /INSTALL/pass.sh
+#                    sudo ./INSTALL/pass.sh
+#            fi
+#
 # Choose gpu-----------------------------------------------------------------------------------------
 echo "$(tput setaf 1)						Which GPU do you use?$(tput sgr 0)"
 read -p "NVIDIA (n), AMD (a), INTEL (i) or QEMU (q)      [n/a/i/q] " -n 1 video
