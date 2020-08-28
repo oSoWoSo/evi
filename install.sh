@@ -31,7 +31,7 @@ read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)	[o/A/s]" -n 1 vm
 echo
 echo "$(tput setaf 1)Which test editor do you want to use?$(tput sgr 0)"
 DEFAULT="m"
-read -p "NANO (n) or MICRO (m) or VI (v)	[n/M/v]" -n 1 editor
+read -p "NANO (n) or MICRO (m) or VIM (v)	[n/M/v]" -n 1 editor
 echo
 echo "$(tput setaf 1)Do you want to install printer support?$(tput sgr 0)"
 DEFAULT="y"
@@ -62,8 +62,8 @@ elif [[ $editor = "m" ]]; then
 	export EDITOR=micro
 	echo EDITOR=micro > ~/.bashrc
 elif [[ $editor = "v" ]]; then
-	export EDITOR=vi
-	echo EDITOR=vi > ~/.bashrc
+	export EDITOR=vim
+	echo EDITOR=vim > ~/.bashrc
 fi
 
 # Choose cpu -----------------------------------------------------------------------------------------
