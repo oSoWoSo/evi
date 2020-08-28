@@ -171,7 +171,7 @@ sudo ln -s /etc/sv/nanoklogd /var/service/
 sudo ln -s /etc/sv/crond /var/service/
 sudo ln -s /etc/sv/chronyd /var/service/
 
-echo "$(tput setaf 1)						Do you want to run lightdm now?$(tput sgr 0)"
+echo "$(tput setaf 1)Do you want to run lightdm now?$(tput sgr 0)"
 read -p "Run lightdm now? YES (y) or NO (n)?          [y/n] " -n 1 lightdm
 echo
 if [[ $lightdm = "y" ]]; then
@@ -179,12 +179,13 @@ if [[ $lightdm = "y" ]]; then
 else
 	sudo touch /etc/sv/lightdm/down
 	sudo ln -s /etc/sv/lightdm /var/service/
-    echo "$(tput setaf 1)	Remove down file after for run Lightdm..$(tput sgr 0)"
-	echo "$(tput setaf 1)	Use	'sudo rm /etc/sv/lightdm/down'$(tput sgr 0)"
+    echo "$(tput setaf 1)Remove down file after for run Lightdm..$(tput sgr 0)"
+	echo "$(tput setaf 1)Use 'sudo rm /etc/sv/lightdm/down'$(tput sgr 0)"
 fi
 read -p "Do you want to restart computer now? YES (y) or NO (n)?	[y/n] " -n 1 restart
 echo
 if [[ $restart = "y" ]]; then
 	sudo restart
 else
-    echo "$(tput setaf 1)						Enjoy void linux$(tput sgr 0)"
+    echo "$(tput setaf 3)Enjoy void linux$(tput sgr 0)"
+fi
