@@ -15,17 +15,17 @@ echo
 echo "$(tput setaf 1)Which window manager do you want to use?$(tput sgr 0)"
 read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)	[o/a/s] " -n 1 vm
 echo
+echo "$(tput setaf 1)Which test editor do you want to use?$(tput sgr 0)"
+read -p "NANO (n) or MICRO (m) or VI (v)	[n/m/v] " -n 1 editor
+echo
 echo "$(tput setaf 1)Do you want to install printer support?$(tput sgr 0)"
 read -p "NO (n) or YES (y)	[n/y] " -n 1 cups
 echo
 echo "$(tput setaf 1)Do you want to share package statistics with void devs?$(tput sgr 0)"
 read -p "NO (n) or YES (y)	[n/y] " -n 1 pop
 echo
-echo "$(tput setaf 1)Unncomment desired language(s) $(tput sgr 0)"
-sleep 3
-sudo micro /etc/default/libc-locales
 
-# Prerequisities-----------------------------------------------------------------------------------------
+# Prerequisities -----------------------------------------------------------------------------------------
 # Freshly installed base system
 # Script will inastall rest..
 # git
@@ -36,7 +36,7 @@ mkdir ~/bin
 git clone https://gitlab.com/awesome-void/install ~/bin/install
 cd ~/bin/install
 
-# Install packages-----------------------------------------------------------------------------------------
+# Install packages -----------------------------------------------------------------------------------------
 # Nonfree and multilib repos
 sudo xbps-install -y $(cat INSTALL/1_repos)
 sudo xbps-install -Sy $(cat INSTALL/2_base)
@@ -46,9 +46,19 @@ sudo xbps-install -Sy $(cat INSTALL/2_base)
 # Clone also personal dotfiles from gitlab? 
 #git clone https://gitlab.com/awesome-void/awesomeVoid ~/bin/dotfiles
 
-# Choose cpu-----------------------------------------------------------------------------------------
+# Choose editor -----------------------------------------------------------------------------------------
+if [[ $editor = "n" ]]; then
+	sudo xbps-install -y nano
+	export EDITOR=nano
+if [[ $editor = "m" ]]; then
+	sudo xbps-install -y micro
+	export EDITOR=micro
+else
+	export EDITOR=vi
+fi
+
+# Choose cpu -----------------------------------------------------------------------------------------
 if [[ $cpu = "a" ]]; then
-	echo amd CPU
 	if [[ $video = "n" ]]; then
 		sudo xbps-install -y $(cat INSTALL/3_nvidia)
     	sudo nvidia-xconfig
@@ -78,7 +88,6 @@ if [[ $cpu = "a" ]]; then
 		sudo xbps-install -y $(cat INSTALL/3_qemu)
 	fi
 elif [[ $cpu = "i" ]]; then
-	echo intel CPU
 	if [[ $video = "n" ]]; then
 		sudo xbps-install -y $(cat INSTALL/3_nvidia)
     	sudo nvidia-xconfig
@@ -111,7 +120,7 @@ elif [[ $cpu = "i" ]]; then
 		sudo xbps-install -y $(cat INSTALL/3_qemu)
 	fi
 fi
-# Choose window manager-----------------------------------------------------------------------------------------
+# Choose window manager -----------------------------------------------------------------------------------------
     if [[ $vm = "o" ]]; then
         sudo xbps-install -y $(cat INSTALL/4_desktop)
         sudo xbps-install -y $(cat INSTALL/5_openbox)
@@ -134,7 +143,7 @@ sudo xbps-install -Sy $(cat INSTALL/6_media)
 #sudo xbps-install -Sy $(cat INSTALL/8_big)
 #sudo xbps-install -Sy $(cat INSTALL/)
 
-# printer support-----------------------------------------------------------------------------------------
+# printer support -----------------------------------------------------------------------------------------
     if [[ $cups = "y" ]]; then
         sudo xbps-install -y $(cat INSTALL/9_print)
         sudo ln -s /etc/sv/cupsd /var/service
@@ -148,21 +157,24 @@ sudo usermod --shell /bin/fish $USER
 # socklog-----------------------------------------------------------------------------------------
 sudo usermod -a -G socklog $USER
 
-# čeština-----------------------------------------------------------------------------------------
+# Language -----------------------------------------------------------------------------------------
+echo "$(tput setaf 1)Unncomment desired language(s) $(tput sgr 0)"
+sleep 3
+sudo $EDITOR /etc/default/libc-locales
 sudo xbps-reconfigure -f glibc-locales
 
-# creating bare repository-----------------------------------------------------------------------------------------
+# creating bare repository -----------------------------------------------------------------------------------------
 mkdir ~/.void
 cd ~/.void
 git init --bare
 
-# Share packages with void devs-----------------------------------------------------------------------------------------
+# Share packages with void devs -----------------------------------------------------------------------------------------
 if [[ $pop = "y" ]]; then
     sudo xbps-install -y PopCorn
     sudo ln -s /etc/sv/popcorn /var/service/
 fi 
 
-# Install services-----------------------------------------------------------------------------------------
+# Install services -----------------------------------------------------------------------------------------
 sudo ln -s /etc/sv/dbus /var/service/
 sudo ln -s /etc/sv/elogind /var/service/
 #sudo ln -s /etc/sv/acpid /var/service/
@@ -185,7 +197,7 @@ fi
 read -p "Do you want to restart computer now? YES (y) or NO (n)?	[y/n] " -n 1 restart
 echo
 if [[ $restart = "y" ]]; then
-	sudo restart
+	sudo reboot
 else
     echo "$(tput setaf 3)Enjoy void linux$(tput sgr 0)"
 fi
