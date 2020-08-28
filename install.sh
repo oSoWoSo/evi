@@ -204,8 +204,8 @@ elif [[ $vm = "a" ]]; then
 		echo "$(tput setaf 1)Use 'sudo rm /etc/sv/lightdm/down'$(tput sgr 0)"
 	fi
 fi	
-read -p "Do you want to restart your computer now? YES (y) or NO (n)?	[y/n] " -n 1 reboot
-echo
+echo "$(tput setaf 1)Do you want to restart your computer now?$(tput sgr 0)"
+read -p "Restart now? YES (y) or NO (n)?	[y/n] " -n 1 reboot
 if [[ $reboot = "n" ]]; then
 	echo "$(tput setaf 3)Enjoy void linux$(tput sgr 0)"
 else
