@@ -16,35 +16,44 @@ reboot="${reboot:-n}"
 # Ask part
 echo "$(tput setaf 1)Which CPU do you use?$(tput sgr 0)"
 read -p "AMD (a) or INTEL (i)	[A/i]" -n 1 cpu
+cpu="${cpu:-a}"
 echo
 echo "$(tput setaf 1)Which GPU do you use?$(tput sgr 0)"
 read -p "NVIDIA (n), AMD (a), INTEL (i) or QEMU (q)	[n/a/i/Q] " -n 1 video
+video="${video:-q}"
 echo
 if [[ $video = "n" ]]; then
 	echo "$(tput setaf 1)Do you want to install PCI passthrough?$(tput sgr 0)"
 	read -p "NO (n) or YES (y)	[N/y]" -n 1 pass
+	pass="${pass:-n}"
 	echo
 elif [[ $video = "a" ]]; then
 	echo "$(tput setaf 1)Do you want to install PCI passthrough?$(tput sgr 0)"
 	read -p "NO (n) or YES (y)	[N/y]" -n 1 pass
+	pass="${pass:-n}"
 	echo
 elif [[ $video = "i" ]]; then
 	echo "$(tput setaf 1)Do you want to install PCI passthrough?$(tput sgr 0)"
 	read -p "NO (n) or YES (y)	[N/y]" -n 1 pass
+	pass="${pass:-n}"
 	echo
 fi	
 echo
 echo "$(tput setaf 1)Which window manager do you want to use?$(tput sgr 0)"
 read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)	[o/A/s]" -n 1 wm
+wm="${wm:-a}"
 echo
 echo "$(tput setaf 1)Which test editor do you want to use?$(tput sgr 0)"
 read -p "NANO (n) or MICRO (m) or VIM (v)	[n/M/v]" -n 1 editor
+editor="${editor:-m}"
 echo
 echo "$(tput setaf 1)Do you want to install printer support?$(tput sgr 0)"
 read -p "NO (n) or YES (y)	[n/Y]" -n 1 cups
+cups="${cups:-y}"
 echo
 echo "$(tput setaf 1)Do you want to share package statistics with void devs?$(tput sgr 0)"
 read -p "NO (n) or YES (y)	[n/Y]" -n 1 pop
+pop="${pop:-y}"
 echo
 
 # Install packages -----------------------------------------------------------------------------------------
@@ -203,6 +212,7 @@ sudo ln -s /etc/sv/chronyd /var/service/
 if [[ $wm = "o" ]]; then
 	echo "$(tput setaf 1)Do you want to run lightdm now?$(tput sgr 0)"
 	read -p "Run lightdm now? NO (n) or YES (y)	[n/Y]" -n 1 lightdm
+	lightdm="${lightdm:-y}"
 	echo
 	if [[ $lightdm = "y" ]]; then
     	sudo ln -s /etc/sv/lightdm /var/service/
@@ -215,6 +225,7 @@ if [[ $wm = "o" ]]; then
 elif [[ $wm = "a" ]]; then
 	echo "$(tput setaf 1)Do you want to run lightdm now?$(tput sgr 0)"
 	read -p "Run lightdm now? NO (n) or YES (y)	[n/Y]" -n 1 lightdm
+	lightdm="${lightdm:-y}"
 	echo
 	if [[ $lightdm = "y" ]]; then
     	sudo ln -s /etc/sv/lightdm /var/service/
@@ -227,6 +238,7 @@ elif [[ $wm = "a" ]]; then
 fi	
 echo "$(tput setaf 1)Do you want to restart your computer now?$(tput sgr 0)"
 read -p "Restart now? NO (n) or YES (y)	[N/y]" -n 1 reboot
+reboot="${reboot:-n}"
 echo
 if [[ $reboot = "n" ]]; then
 	echo "$(tput setaf 3)Enjoy void linux$(tput sgr 0)"
