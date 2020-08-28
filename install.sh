@@ -39,10 +39,10 @@ sudo xbps-install -Sy $(cat INSTALL/2_base)
 if [[ $editor = "n" ]]; then
 	sudo xbps-install -y nano
 	export EDITOR=nano
-if [[ $editor = "m" ]]; then
+elif [[ $editor = "m" ]]; then
 	sudo xbps-install -y micro
 	export EDITOR=micro
-else
+elif [[ $editor = "m" ]]; then
 	export EDITOR=vi
 fi
 
@@ -185,10 +185,11 @@ else
 	echo "$(tput setaf 1)Remove down file after for run Lightdm..$(tput sgr 0)"
 	echo "$(tput setaf 1)Use 'sudo rm /etc/sv/lightdm/down'$(tput sgr 0)"
 fi
-read -p "Do you want to restart your computer now? YES (y) or NO (n)?	[y/n] " -n 1 restart
 echo
-if [[ $restart = "y" ]]; then
+read -p "Do you want to restart your computer now? YES (y) or NO (n)?	[y/n] " -n 1 reboot
+echo
+if [[ $reboot = "y" ]]; then
 	sudo reboot
-	else
+else
     echo "$(tput setaf 3)Enjoy void linux$(tput sgr 0)"
 fi
