@@ -39,11 +39,14 @@ sudo xbps-install -Sy $(cat INSTALL/2_base)
 if [[ $editor = "n" ]]; then
 	sudo xbps-install -y nano
 	export EDITOR=nano
+	echo EDITOR=nano > ~/.bashrc
 elif [[ $editor = "m" ]]; then
 	sudo xbps-install -y micro
 	export EDITOR=micro
+	echo EDITOR=micro > ~/.bashrc
 elif [[ $editor = "m" ]]; then
 	export EDITOR=vi
+	echo EDITOR=vi > ~/.bashrc
 fi
 
 # Choose cpu -----------------------------------------------------------------------------------------
@@ -113,7 +116,8 @@ fi
     if [[ $vm = "o" ]]; then
         sudo xbps-install -y $(cat INSTALL/4_desktop)
         sudo xbps-install -y $(cat INSTALL/5_openbox)
-        sudo -u $USER obmenu-generator -p -i -u -d -c
+        -n 1 desk
+		sudo -u $USER obmenu-generator -p -i -u -d -c
 		echo "autorandr common &
 		tint2 &
 		setxkbmap cz &
@@ -141,6 +145,7 @@ sudo xbps-install -Sy $(cat INSTALL/6_media)
 # make fish base shell-----------------------------------------------------------------------------------------
 sudo usermod --shell /bin/fish $USER
 export TERMINAL=sakura
+echo TERMINAL=sakura > ~/.bashrc
 #echo ". ~/.config/fish/aliases.fish" >> ~/.config/fish/config.fish
 #echo "alias xterm 'sakura'" >> ~/.config/fish/aliases.fish
 
@@ -173,18 +178,32 @@ sudo ln -s /etc/sv/nanoklogd /var/service/
 sudo ln -s /etc/sv/crond /var/service/
 sudo ln -s /etc/sv/chronyd /var/service/
 
-echo "$(tput setaf 1)Do you want to run lightdm now?$(tput sgr 0)"
-read -p "Run lightdm now? YES (y) or NO (n)?          [y/n] " -n 1 lightdm
-echo
-if [[ $lightdm = "y" ]]; then
-    sudo ln -s /etc/sv/lightdm /var/service/
-else
-	sudo touch /etc/sv/lightdm/down
-	sudo ln -s /etc/sv/lightdm /var/service/
-    sudo rm /etc/sv/lightdm/down
-	echo "$(tput setaf 1)Remove down file after for run Lightdm..$(tput sgr 0)"
-	echo "$(tput setaf 1)Use 'sudo rm /etc/sv/lightdm/down'$(tput sgr 0)"
-fi
+if [[ $vm = "o" ]]; then
+	echo "$(tput setaf 1)Do you want to run lightdm now?$(tput sgr 0)"
+	read -p "Run lightdm now? YES (y) or NO (n)?          [y/n] " -n 1 lightdm
+	echo
+	if [[ $lightdm = "y" ]]; then
+    	sudo ln -s /etc/sv/lightdm /var/service/
+	else
+		sudo touch /etc/sv/lightdm/down
+		sudo ln -s /etc/sv/lightdm /var/service/
+    	sudo rm /etc/sv/lightdm/down
+		echo "$(tput setaf 1)Remove down file after for run Lightdm..$(tput sgr 0)"
+		echo "$(tput setaf 1)Use 'sudo rm /etc/sv/lightdm/down'$(tput sgr 0)"
+	fi
+if [[ $vm = "a" ]]; then
+	echo "$(tput setaf 1)Do you want to run lightdm now?$(tput sgr 0)"
+	read -p "Run lightdm now? YES (y) or NO (n)?          [y/n] " -n 1 lightdm
+	echo
+	if [[ $lightdm = "y" ]]; then
+    	sudo ln -s /etc/sv/lightdm /var/service/
+	else
+		sudo touch /etc/sv/lightdm/down
+		sudo ln -s /etc/sv/lightdm /var/service/
+    	sudo rm /etc/sv/lightdm/down
+		echo "$(tput setaf 1)Remove down file after for run Lightdm..$(tput sgr 0)"
+		echo "$(tput setaf 1)Use 'sudo rm /etc/sv/lightdm/down'$(tput sgr 0)"
+	fi
 echo
 read -p "Do you want to restart your computer now? YES (y) or NO (n)?	[y/n] " -n 1 reboot
 echo
