@@ -23,7 +23,6 @@ geany-plugins-extra
 conky
 rofi
 pmount
-autorandr
 mesa-vaapi
 mesa-vdpau
 clearine

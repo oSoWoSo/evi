@@ -81,9 +81,9 @@ echo
 # Nonfree and multilib repos
 chmod +x piu
 sudo ./piu u
-sudo ./piu i -y $(cat INSTALL/1_repos)
+sudo ./piu i -y $(cat INSTALL/01_repos)
 sudo ./piu u
-sudo ./piu i -y $(cat INSTALL/2_base)
+sudo ./piu i -y $(cat INSTALL/02_base)
 
 # Remember git login information?
 #git config --global credential.helper store
@@ -106,7 +106,7 @@ fi
 # Choose CPU, GPU, pasthrough -----------------------------------------------------------------------------------------
 if [[ $cpu = "a" ]]; then
 	if [[ $video = "n" ]]; then
-		sudo ./piu i -y $(cat INSTALL/3_nvidia)
+		sudo ./piu i -y $(cat INSTALL/03_nvidia)
     	sudo nvidia-xconfig
 		if [[ $pass = "y" ]]; then
 			modprobe kvm-amd
@@ -115,7 +115,7 @@ if [[ $cpu = "a" ]]; then
 			sudo ./INSTALL/pass.sh
 		fi
 	elif [[ $video = "a" ]]; then	
-		sudo ./piu i -y $(cat INSTALL/3_ati)
+		sudo ./piu i -y $(cat INSTALL/03_ati)
 		if [[ $pass = "y" ]]; then
 			modprobe kvm-amd
 			sudo cp -r OVMF /usr/share/ovmf
@@ -123,7 +123,7 @@ if [[ $cpu = "a" ]]; then
 			sudo ./INSTALL/pass.sh
 		fi
 	elif [[ $video = "i" ]]; then	
-		sudo ./piu i -y $(cat INSTALL/3_intel)
+		sudo ./piu i -y $(cat INSTALL/03_intel)
 		if [[ $pass = "y" ]]; then
 			modprobe kvm-amd
 			sudo cp -r OVMF /usr/share/ovmf
@@ -131,11 +131,11 @@ if [[ $cpu = "a" ]]; then
 			sudo ./INSTALL/pass.sh
 		fi
 	elif [[ $video = "q" ]]; then
-		sudo ./piu i -y $(cat INSTALL/3_qemu)
+		sudo ./piu i -y $(cat INSTALL/03_qemu)
 	fi
 elif [[ $cpu = "i" ]]; then
 	if [[ $video = "n" ]]; then
-		sudo ./piu i -y $(cat INSTALL/3_nvidia)
+		sudo ./piu i -y $(cat INSTALL/03_nvidia)
     	sudo nvidia-xconfig
 		if [[ $pass = "y" ]]; then
 			echo intel nvidia yes
@@ -145,7 +145,7 @@ elif [[ $cpu = "i" ]]; then
 			sudo ./INSTALL/pass.sh
 		fi
 	elif [[ $video = "a" ]]; then	
-		sudo ./piu i -y $(cat INSTALL/3_ati)
+		sudo ./piu i -y $(cat INSTALL/03_ati)
 		if [[ $pass = "y" ]]; then
 			echo intel amd yes
 			modprobe kvm-intel
@@ -154,7 +154,7 @@ elif [[ $cpu = "i" ]]; then
 			sudo ./INSTALL/pass.sh
 		fi
     elif [[ $video = "i" ]]; then	
-		sudo ./piu i -y $(cat INSTALL/3_intel)
+		sudo ./piu i -y $(cat INSTALL/03_intel)
 		if [[ $pass = "y" ]]; then
 			echo intel intel yes
 			modprobe kvm-intel
@@ -163,7 +163,7 @@ elif [[ $cpu = "i" ]]; then
 			sudo ./INSTALL/pass.sh
 		fi
 	elif [[ $video = "q" ]]; then
-		sudo ./piu i -y $(cat INSTALL/3_qemu)
+		sudo ./piu i -y $(cat INSTALL/03_qemu)
 	fi
 fi
 # Choose default shell -----------------------------------------------------------------------------------------
@@ -174,7 +174,7 @@ elif [[ $shell = "b" ]]; then
 	sudo ./piu i -y bash-completion
 	sudo usermod --shell /bin/bash $USER
 elif [[ $shell = "z" ]]; then	
-	sudo ./piu i -y $(cat INSTALL/zsh)
+	sudo ./piu i -y zsh zsh-autosuggestions zsh-completions zsh-history-substring-search zsh-syntax-highlighting
 	sudo usermod --shell /bin/zsh $USER
 fi	
 # Choose terminal emulator --------------------------------------------------------------------------------------
@@ -193,12 +193,11 @@ elif [[ $term = "t" ]]; then
 fi
 # Choose window manager -----------------------------------------------------------------------------------------
 if [[ $wm = "o" ]]; then
-    sudo ./piu i -y $(cat INSTALL/4_desktop)
-    sudo ./piu i -y $(cat INSTALL/5_openbox)
+    sudo ./piu i -y $(cat INSTALL/04_desktop)
+    sudo ./piu i -y $(cat INSTALL/05_openbox)
     -n 1 desk
 	sudo -u $USER obmenu-generator -p -i -u -d -c
-	echo "autorandr common &
-	tint2 &
+	echo "tint2 &
 	setxkbmap cz &
 	nitrogen --restore &
 	volumeicon &
@@ -206,17 +205,17 @@ if [[ $wm = "o" ]]; then
 #   cp ~/bin/dotfiles/home/zen/.config/openbox/rc.xml ~/.config/openbox
 elif [[ $wm = "a" ]]; then
 	echo awesome
-    sudo ./piu i -y $(cat INSTALL/4_desktop)
-    sudo ./piu i -y $(cat INSTALL/5_awesome)
+    sudo ./piu i -y $(cat INSTALL/04_desktop)
+    sudo ./piu i -y $(cat INSTALL/05_awesome)
 fi
-sudo xbps-install -Sy $(cat INSTALL/6_media)
-#sudo xbps-install -Sy $(cat INSTALL/7_virtual)
-#sudo xbps-install -Sy $(cat INSTALL/8_big)
+sudo xbps-install -Sy $(cat INSTALL/06_media)
+#sudo xbps-install -Sy $(cat INSTALL/07_virtual)
+#sudo xbps-install -Sy $(cat INSTALL/08_big)
 #sudo xbps-install -Sy $(cat INSTALL/)
 
 # printer support -----------------------------------------------------------------------------------------
 if [[ $cups = "y" ]]; then
-    sudo ./piu i -y $(cat INSTALL/9_print)
+    sudo ./piu i -y $(cat INSTALL/09_print)
     sudo ln -s /etc/sv/cupsd /var/service
 fi    
 
