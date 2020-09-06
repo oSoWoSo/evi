@@ -79,6 +79,7 @@ echo
 
 # Install packages -----------------------------------------------------------------------------------------
 # Nonfree and multilib repos
+chmod +x piu
 sudo ./piu u
 sudo ./piu i $(cat INSTALL/1_repos)
 sudo ./piu u
