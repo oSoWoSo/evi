@@ -14,6 +14,7 @@ cups="${cups:-y}"
 pop="${pop:-y}"
 lightdm="${lightdm:-y}"
 reboot="${reboot:-n}"
+virt="${virt:-y}"
 
 # Ask part
 echo "$(tput setaf 1)Which CPU do you use?$(tput sgr 0)"
@@ -65,6 +66,10 @@ echo
 echo "$(tput setaf 1)Do you want to share package statistics with void devs?$(tput sgr 0)"
 read -p "NO (n) or YES (y)	[n/Y]" -n 1 pop
 pop="${pop:-y}"
+echo
+echo "$(tput setaf 1)Do you want to install virt-manager?$(tput sgr 0)"
+read -p "NO (n) or YES (y)	[n/Y]" -n 1 virt
+virt="${virt:-y}"
 echo
 
 # Install packages -----------------------------------------------------------------------------------------
@@ -212,6 +217,20 @@ if [[ $cups = "y" ]]; then
     sudo xbps-install -y $(cat INSTALL/9_print)
     sudo ln -s /etc/sv/cupsd /var/service
 fi    
+
+# Virtualization support -----------------------------------------------------------------------------------------
+if [[ $virt = "y" ]]; then
+    sudo piu i virt-manager qemu
+	sudo ln -s /etc/sv/libvirtd /var/service
+	sudo ln -s /etc/sv/virtlockd /var/service
+	sudo ln -s /etc/sv/virtlogd /var/service
+	usermod -aG kvm $USER
+	if [[ $cpu = "a" ]]; then
+		modprobe kvm-amd
+	elif [[ $cpu = "i" ]]; then
+		modprobe kvm-intel
+	fi
+fi  
 
 # make fish base shell-----------------------------------------------------------------------------------------
 #echo ". ~/.config/fish/aliases.fish" >> ~/.config/fish/config.fish
