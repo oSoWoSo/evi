@@ -49,10 +49,14 @@ echo
 echo "$(tput setaf 1)Which window manager do you want to use?$(tput sgr 0)"
 read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)	[o/A/s]" -n 1 wm
 wm="${wm:-a}"
-if [[ $wm = "a" OR "o" ]]; then
+if [[ $wm = "a"]]; then
 	echo "$(tput setaf 1)Which terminal emulator do you want to use?$(tput sgr 0)"
 	read -p "SAKURA (s) or XTERM (x) or TERMINATOR (t)	[S/x/t]" -n 1 term
 	term="${term:-s}"
+elif [[ $wm = "o"]]; then
+	echo "$(tput setaf 1)Which terminal emulator do you want to use?$(tput sgr 0)"
+	read -p "SAKURA (s) or XTERM (x) or TERMINATOR (t)	[S/x/t]" -n 1 term
+	term="${term:-s}"	
 fi
 echo
 echo "$(tput setaf 1)Which text editor do you want to use?$(tput sgr 0)"
