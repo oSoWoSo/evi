@@ -81,9 +81,9 @@ echo
 # Nonfree and multilib repos
 chmod +x piu
 sudo ./piu u
-sudo ./piu i $(cat INSTALL/1_repos)
+sudo ./piu i -y $(cat INSTALL/1_repos)
 sudo ./piu u
-sudo ./piu i $(cat INSTALL/2_base)
+sudo ./piu i -y $(cat INSTALL/2_base)
 
 # Remember git login information?
 #git config --global credential.helper store
@@ -92,11 +92,11 @@ sudo ./piu i $(cat INSTALL/2_base)
 
 # Choose editor -----------------------------------------------------------------------------------------
 if [[ $editor = "n" ]]; then
-	sudo xbps-install -y nano
+	sudo ./piu i -y nano
 	export EDITOR=nano
 	echo EDITOR=nano > ~/.bashrc
 elif [[ $editor = "m" ]]; then
-	sudo xbps-install -y micro
+	sudo ./piu i -y micro
 	export EDITOR=micro
 	echo EDITOR=micro > ~/.bashrc
 elif [[ $editor = "v" ]]; then
@@ -106,7 +106,7 @@ fi
 # Choose CPU, GPU, pasthrough -----------------------------------------------------------------------------------------
 if [[ $cpu = "a" ]]; then
 	if [[ $video = "n" ]]; then
-		sudo xbps-install -y $(cat INSTALL/3_nvidia)
+		sudo ./piu i -y $(cat INSTALL/3_nvidia)
     	sudo nvidia-xconfig
 		if [[ $pass = "y" ]]; then
 			modprobe kvm-amd
@@ -115,7 +115,7 @@ if [[ $cpu = "a" ]]; then
 			sudo ./INSTALL/pass.sh
 		fi
 	elif [[ $video = "a" ]]; then	
-		sudo xbps-install -y $(cat INSTALL/3_ati)
+		sudo ./piu i -y $(cat INSTALL/3_ati)
 		if [[ $pass = "y" ]]; then
 			modprobe kvm-amd
 			sudo cp -r OVMF /usr/share/ovmf
@@ -123,7 +123,7 @@ if [[ $cpu = "a" ]]; then
 			sudo ./INSTALL/pass.sh
 		fi
 	elif [[ $video = "i" ]]; then	
-		sudo xbps-install -y $(cat INSTALL/3_intel)
+		sudo ./piu i -y $(cat INSTALL/3_intel)
 		if [[ $pass = "y" ]]; then
 			modprobe kvm-amd
 			sudo cp -r OVMF /usr/share/ovmf
@@ -131,11 +131,11 @@ if [[ $cpu = "a" ]]; then
 			sudo ./INSTALL/pass.sh
 		fi
 	elif [[ $video = "q" ]]; then
-		sudo xbps-install -y $(cat INSTALL/3_qemu)
+		sudo ./piu i -y $(cat INSTALL/3_qemu)
 	fi
 elif [[ $cpu = "i" ]]; then
 	if [[ $video = "n" ]]; then
-		sudo xbps-install -y $(cat INSTALL/3_nvidia)
+		sudo ./piu i -y $(cat INSTALL/3_nvidia)
     	sudo nvidia-xconfig
 		if [[ $pass = "y" ]]; then
 			echo intel nvidia yes
@@ -145,7 +145,7 @@ elif [[ $cpu = "i" ]]; then
 			sudo ./INSTALL/pass.sh
 		fi
 	elif [[ $video = "a" ]]; then	
-		sudo xbps-install -y $(cat INSTALL/3_ati)
+		sudo ./piu i -y $(cat INSTALL/3_ati)
 		if [[ $pass = "y" ]]; then
 			echo intel amd yes
 			modprobe kvm-intel
@@ -154,7 +154,7 @@ elif [[ $cpu = "i" ]]; then
 			sudo ./INSTALL/pass.sh
 		fi
     elif [[ $video = "i" ]]; then	
-		sudo xbps-install -y $(cat INSTALL/3_intel)
+		sudo ./piu i -y $(cat INSTALL/3_intel)
 		if [[ $pass = "y" ]]; then
 			echo intel intel yes
 			modprobe kvm-intel
@@ -163,42 +163,42 @@ elif [[ $cpu = "i" ]]; then
 			sudo ./INSTALL/pass.sh
 		fi
 	elif [[ $video = "q" ]]; then
-		sudo xbps-install -y $(cat INSTALL/3_qemu)
+		sudo ./piu i -y $(cat INSTALL/3_qemu)
 	fi
 fi
 # Choose default shell -----------------------------------------------------------------------------------------
 read -p "FISH (f) or BASH (b) or ZSH (z)	[F/b/z]" -n 1 shell
 shell="${shell:-f}"
 if [[ $shell = "f" ]]; then
-	sudo xbps-install -y fish-shell
+	sudo ./piu i -y fish-shell
 	sudo usermod --shell /bin/fish $USER
 elif [[ $shell = "b" ]]; then	
-	sudo xbps-install -y bash-completion
+	sudo ./piu i -y bash-completion
 	sudo usermod --shell /bin/bash $USER
 elif [[ $shell = "z" ]]; then	
-	sudo xbps-install -y $(cat INSTALL/zsh)
+	sudo ./piu i -y $(cat INSTALL/zsh)
 	sudo usermod --shell /bin/zsh $USER
 fi	
 # Choose terminal emulator --------------------------------------------------------------------------------------
 echo
 read -p "SAKURA (s) or XTERM (x) or TERMINATOR (t)	[S/x/t]" -n 1 term
 if [[ $term = "s" ]]; then
-	sudo xbps-install -y sakura
+	sudo ./piu i -y sakura
 	export TERM=sakura
 	echo TERM=sakura > ~/.bashrc
 elif [[ $term = "x" ]]; then
-	sudo xbps-install -y xterm
+	sudo ./piu i -y xterm
 	export TERM=xterm
 	echo TERM=xterm > ~/.bashrc
 elif [[ $term = "t" ]]; then		
-	sudo xbps-install -y terminator
+	sudo ./piu i -y terminator
 	export TERM=terminator
 	echo TERM=terminator > ~/.bashrc
 fi
 # Choose window manager -----------------------------------------------------------------------------------------
 if [[ $wm = "o" ]]; then
-    sudo xbps-install -y $(cat INSTALL/4_desktop)
-    sudo xbps-install -y $(cat INSTALL/5_openbox)
+    sudo ./piu i -y $(cat INSTALL/4_desktop)
+    sudo ./piu i -y $(cat INSTALL/5_openbox)
     -n 1 desk
 	sudo -u $USER obmenu-generator -p -i -u -d -c
 	echo "autorandr common &
@@ -210,8 +210,8 @@ if [[ $wm = "o" ]]; then
 #   cp ~/bin/dotfiles/home/zen/.config/openbox/rc.xml ~/.config/openbox
 elif [[ $wm = "a" ]]; then
 	echo awesome
-    sudo xbps-install -y $(cat INSTALL/4_desktop)
-    sudo xbps-install -y $(cat INSTALL/5_awesome)
+    sudo ./piu i -y $(cat INSTALL/4_desktop)
+    sudo ./piu i -y $(cat INSTALL/5_awesome)
 fi
 sudo xbps-install -Sy $(cat INSTALL/6_media)
 #sudo xbps-install -Sy $(cat INSTALL/7_virtual)
@@ -220,7 +220,7 @@ sudo xbps-install -Sy $(cat INSTALL/6_media)
 
 # printer support -----------------------------------------------------------------------------------------
 if [[ $cups = "y" ]]; then
-    sudo xbps-install -y $(cat INSTALL/9_print)
+    sudo ./piu i -y $(cat INSTALL/9_print)
     sudo ln -s /etc/sv/cupsd /var/service
 fi    
 
@@ -258,7 +258,7 @@ git init --bare
 
 # Share packages with void devs -----------------------------------------------------------------------------------------
 if [[ $pop = "y" ]]; then
-    sudo xbps-install -y PopCorn
+    sudo ./piu i -y PopCorn
     sudo ln -s /etc/sv/popcorn /var/service/
 fi 
 
