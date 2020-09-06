@@ -2,7 +2,7 @@
 # Void Linux post-install script
 echo "$(tput setaf 3)Starting Void Linux post-install script$(tput sgr 0)"
 
-# Default Answers
+# Default Answers ------------------------------------------------------------------------------------------------
 cpu="${cpu:-a}"
 video="${video:-q}"
 shell="${shell:-f}"
@@ -16,7 +16,7 @@ lightdm="${lightdm:-y}"
 reboot="${reboot:-n}"
 virt="${virt:-y}"
 
-# Ask part
+# Ask part -----------------------------------------------------------------------------------------------------------
 echo "$(tput setaf 1)Which CPU do you use?$(tput sgr 0)"
 read -p "AMD (a) or INTEL (i)	[A/i]" -n 1 cpu
 cpu="${cpu:-a}"
@@ -89,14 +89,14 @@ sudo ./piu i -y $(cat INSTALL/02_base)
 # Choose editor -----------------------------------------------------------------------------------------
 if [[ $editor = "n" ]]; then
 	sudo ./piu i -y nano
-	export EDITOR=nano
+	export EDITOR="nano"
 	echo EDITOR=nano > ~/.bashrc
 elif [[ $editor = "m" ]]; then
 	sudo ./piu i -y micro
-	export EDITOR=micro
+	export EDITOR="micro"
 	echo EDITOR=micro > ~/.bashrc
 elif [[ $editor = "v" ]]; then
-	export EDITOR=vim
+	export EDITOR="vim"
 	echo EDITOR=vim > ~/.bashrc
 fi
 # Choose CPU, GPU, pasthrough -----------------------------------------------------------------------------------------
@@ -176,22 +176,16 @@ fi
 # Choose terminal emulator --------------------------------------------------------------------------------------
 if [[ $term = "s" ]]; then
 	sudo ./piu i -y sakura
-	export TERMINAL=sakura
+	export TERMINAL="sakura"
 	echo TERM=sakura > ~/.bashrc
-	bash
-	exit
 elif [[ $term = "x" ]]; then
 	sudo ./piu i -y xterm
-	export TERMINAL=xterm
+	export TERMINAL="xterm"
 	echo TERM=xterm > ~/.bashrc
-	bash
-	exit
 elif [[ $term = "t" ]]; then		
 	sudo ./piu i -y terminator
-	export TERMINAL=terminator
+	export TERMINAL="terminator"
 	echo TERM=terminator > ~/.bashrc
-	bash
-	exit
 fi
 # Choose window manager -----------------------------------------------------------------------------------------
 if [[ $wm = "o" ]]; then
@@ -304,3 +298,4 @@ if [[ $reboot = "n" ]]; then
 else
     sudo reboot
 fi
+# Enjoy Void linux ----------------------------------------------------------------------------------------------------------------
