@@ -167,8 +167,6 @@ elif [[ $cpu = "i" ]]; then
 	fi
 fi
 # Choose default shell -----------------------------------------------------------------------------------------
-read -p "FISH (f) or BASH (b) or ZSH (z)	[F/b/z]" -n 1 shell
-shell="${shell:-f}"
 if [[ $shell = "f" ]]; then
 	sudo ./piu i -y fish-shell
 	sudo usermod --shell /bin/fish $USER
