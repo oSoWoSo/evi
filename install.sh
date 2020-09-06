@@ -69,8 +69,10 @@ echo
 
 # Install packages -----------------------------------------------------------------------------------------
 # Nonfree and multilib repos
-sudo xbps-install -y $(cat INSTALL/1_repos)
-sudo xbps-install -Sy $(cat INSTALL/2_base)
+sudo piu u
+sudo piu i $(cat INSTALL/1_repos)
+sudo piu u
+sudo piu i $(cat INSTALL/2_base)
 
 # Remember git login information?
 #git config --global credential.helper store
