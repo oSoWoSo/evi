@@ -182,16 +182,19 @@ if [[ $term = "s" ]]; then
 	export TERMINAL=sakura
 	echo TERM=sakura > ~/.bashrc
 	bash
+	exit
 elif [[ $term = "x" ]]; then
 	sudo ./piu i -y xterm
 	export TERMINAL=xterm
 	echo TERM=xterm > ~/.bashrc
 	bash
+	exit
 elif [[ $term = "t" ]]; then		
 	sudo ./piu i -y terminator
 	export TERMINAL=terminator
 	echo TERM=terminator > ~/.bashrc
 	bash
+	exit
 fi
 # Choose window manager -----------------------------------------------------------------------------------------
 if [[ $wm = "o" ]]; then
