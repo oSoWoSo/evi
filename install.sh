@@ -224,7 +224,7 @@ if [[ $virt = "y" ]]; then
 	sudo ln -s /etc/sv/libvirtd /var/service
 	sudo ln -s /etc/sv/virtlockd /var/service
 	sudo ln -s /etc/sv/virtlogd /var/service
-	usermod -aG kvm $USER
+	sudo usermod -aG kvm $USER
 	if [[ $cpu = "a" ]]; then
 		modprobe kvm-amd
 	elif [[ $cpu = "i" ]]; then
