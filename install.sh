@@ -39,7 +39,6 @@ elif [[ $video = "i" ]]; then
 	echo "$(tput setaf 1)Do you want to install PCI passthrough?$(tput sgr 0)"
 	read -p "NO (n) or YES (y)	[N/y]" -n 1 pass
 	pass="${pass:-n}"
-	echo
 fi	
 echo
 echo "$(tput setaf 1)Which shell do you want to use?$(tput sgr 0)"
