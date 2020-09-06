@@ -5,8 +5,10 @@ echo "$(tput setaf 3)Starting Void Linux post-install script$(tput sgr 0)"
 # Default Answers
 cpu="${cpu:-a}"
 video="${video:-q}"
+shell="${shell:-f}"
 pass="${pass:-n}"
 wm="${wm:-a}"
+term="${term:-s}"
 editor="${editor:-m}"
 cups="${cups:-y}"
 pop="${pop:-y}"
@@ -39,6 +41,10 @@ elif [[ $video = "i" ]]; then
 	echo
 fi	
 echo
+echo "$(tput setaf 1)Which shell do you want to use?$(tput sgr 0)"
+read -p "FISH (f) or BASH (b) or ZSH (z)	[F/b/z]" -n 1 shell
+shell="${shell:-f}"
+echo
 echo "$(tput setaf 1)Which window manager do you want to use?$(tput sgr 0)"
 read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)	[o/A/s]" -n 1 wm
 wm="${wm:-a}"
@@ -52,7 +58,6 @@ echo "$(tput setaf 1)Which text editor do you want to use?$(tput sgr 0)"
 read -p "NANO (n) or MICRO (m) or VIM (v)	[n/M/v]" -n 1 editor
 editor="${editor:-m}"
 echo
-
 echo "$(tput setaf 1)Do you want to install printer support?$(tput sgr 0)"
 read -p "NO (n) or YES (y)	[n/Y]" -n 1 cups
 cups="${cups:-y}"
@@ -149,20 +154,34 @@ elif [[ $cpu = "i" ]]; then
 		sudo xbps-install -y $(cat INSTALL/3_qemu)
 	fi
 fi
+# Choose default shell -----------------------------------------------------------------------------------------
+read -p "FISH (f) or BASH (b) or ZSH (z)	[F/b/z]" -n 1 shell
+shell="${shell:-f}"
+if [[ $shell = "f" ]]; then
+	sudo xbps-install -y fish-shell
+	sudo usermod --shell /bin/fish $USER
+elif [[ $shell = "b" ]]; then	
+	sudo xbps-install -y bash-completion
+	sudo usermod --shell /bin/bash $USER
+elif [[ $shell = "z" ]]; then	
+	sudo xbps-install -y $(cat INSTALL/zsh)
+	sudo usermod --shell /bin/zsh $USER
+fi	
 # Choose terminal emulator --------------------------------------------------------------------------------------
+echo
 read -p "SAKURA (s) or XTERM (x) or TERMINATOR (t)	[S/x/t]" -n 1 term
 if [[ $term = "s" ]]; then
 	sudo xbps-install -y sakura
-	export TERMINAL=sakura
-	echo TERMINAL=sakura > ~/.bashrc
-elif [[ $term = "x" ]]; then	
+	export TERM=sakura
+	echo TERM=sakura > ~/.bashrc
+elif [[ $term = "x" ]]; then
 	sudo xbps-install -y xterm
-	export TERMINAL=xterm
-	echo TERMINAL=xterm > ~/.bashrc
-elif [[ $term = "t" ]]; then	
-	sudo xbps-install -y sakura
-	export TERMINAL=terminator
-	echo TERMINAL=terminator > ~/.bashrc
+	export TERM=xterm
+	echo TERM=xterm > ~/.bashrc
+elif [[ $term = "t" ]]; then		
+	sudo xbps-install -y terminator
+	export TERM=terminator
+	echo TERM=terminator > ~/.bashrc
 fi
 # Choose window manager -----------------------------------------------------------------------------------------
     if [[ $wm = "o" ]]; then
@@ -195,7 +214,7 @@ sudo xbps-install -Sy $(cat INSTALL/6_media)
     fi    
 
 # make fish base shell-----------------------------------------------------------------------------------------
-sudo usermod --shell /bin/fish $USER
+
 #echo ". ~/.config/fish/aliases.fish" >> ~/.config/fish/config.fish
 #echo "alias xterm 'sakura'" >> ~/.config/fish/aliases.fish
 
