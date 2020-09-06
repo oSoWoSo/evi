@@ -42,11 +42,17 @@ echo
 echo "$(tput setaf 1)Which window manager do you want to use?$(tput sgr 0)"
 read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)	[o/A/s]" -n 1 wm
 wm="${wm:-a}"
+	if [[ $wm = "a" OR "o" ]]; then
+	echo "$(tput setaf 1)Which terminal emulator do you want to use?$(tput sgr 0)"
+	read -p "SAKURA (s) or XTERM (x) or TERMINATOR (t)	[S/x/t]" -n 1 term
+	term="${term:-s}"
+	fi
 echo
-echo "$(tput setaf 1)Which test editor do you want to use?$(tput sgr 0)"
+echo "$(tput setaf 1)Which text editor do you want to use?$(tput sgr 0)"
 read -p "NANO (n) or MICRO (m) or VIM (v)	[n/M/v]" -n 1 editor
 editor="${editor:-m}"
 echo
+
 echo "$(tput setaf 1)Do you want to install printer support?$(tput sgr 0)"
 read -p "NO (n) or YES (y)	[n/Y]" -n 1 cups
 cups="${cups:-y}"
@@ -143,6 +149,21 @@ elif [[ $cpu = "i" ]]; then
 		sudo xbps-install -y $(cat INSTALL/3_qemu)
 	fi
 fi
+# Choose terminal emulator --------------------------------------------------------------------------------------
+read -p "SAKURA (s) or XTERM (x) or TERMINATOR (t)	[S/x/t]" -n 1 term
+if [[ $term = "s" ]]; then
+	sudo xbps-install -y sakura
+	export TERMINAL=sakura
+	echo TERMINAL=sakura > ~/.bashrc
+elif [[ $term = "x" ]]; then	
+	sudo xbps-install -y xterm
+	export TERMINAL=xterm
+	echo TERMINAL=xterm > ~/.bashrc
+elif [[ $term = "t" ]]; then	
+	sudo xbps-install -y sakura
+	export TERMINAL=terminator
+	echo TERMINAL=terminator > ~/.bashrc
+fi
 # Choose window manager -----------------------------------------------------------------------------------------
     if [[ $wm = "o" ]]; then
         sudo xbps-install -y $(cat INSTALL/4_desktop)
@@ -175,8 +196,6 @@ sudo xbps-install -Sy $(cat INSTALL/6_media)
 
 # make fish base shell-----------------------------------------------------------------------------------------
 sudo usermod --shell /bin/fish $USER
-export TERMINAL=sakura
-echo TERMINAL=sakura > ~/.bashrc
 #echo ". ~/.config/fish/aliases.fish" >> ~/.config/fish/config.fish
 #echo "alias xterm 'sakura'" >> ~/.config/fish/aliases.fish
 
