@@ -76,9 +76,9 @@ echo
 # Install packages -----------------------------------------------------------------------------------------
 # Nonfree and multilib repos
 chmod +x piu
-sudo ./piu u
+sudo ./piu u -y
 sudo ./piu i -y $(cat INSTALL/01_repos)
-sudo ./piu u
+sudo ./piu u -y
 sudo ./piu i -y $(cat INSTALL/02_base)
 
 # Remember git login information?
@@ -217,7 +217,7 @@ fi
 
 # Virtualization support -----------------------------------------------------------------------------------------
 if [[ $virt = "y" ]]; then
-    sudo ./piu i virt-manager qemu
+    sudo ./piu i -y $(cat INSTALL/07_virtual)
 	sudo ln -s /etc/sv/libvirtd /var/service
 	sudo ln -s /etc/sv/virtlockd /var/service
 	sudo ln -s /etc/sv/virtlogd /var/service
@@ -246,6 +246,7 @@ sudo xbps-reconfigure -f glibc-locales
 mkdir ~/.void
 cd ~/.void
 git init --bare
+cd ~/bin/install
 
 # Share packages with void devs -----------------------------------------------------------------------------------------
 if [[ $pop = "y" ]]; then
