@@ -195,7 +195,6 @@ fi
 if [[ $wm = "o" ]]; then
     sudo ./piu i -y $(cat INSTALL/04_desktop)
     sudo ./piu i -y $(cat INSTALL/05_openbox)
-    -n 1 desk
 	sudo -u $USER obmenu-generator -p -i -u -d -c
 	echo "tint2 &
 	setxkbmap cz &
@@ -208,7 +207,7 @@ elif [[ $wm = "a" ]]; then
     sudo ./piu i -y $(cat INSTALL/04_desktop)
     sudo ./piu i -y $(cat INSTALL/05_awesome)
 fi
-sudo xbps-install -Sy $(cat INSTALL/06_media)
+sudo ./piu i -y $(cat INSTALL/06_media)
 #sudo xbps-install -Sy $(cat INSTALL/07_virtual)
 #sudo xbps-install -Sy $(cat INSTALL/08_big)
 #sudo xbps-install -Sy $(cat INSTALL/)
@@ -241,7 +240,7 @@ fi
 sudo usermod -a -G socklog $USER
 
 # Language -----------------------------------------------------------------------------------------
-echo "$(tput setaf 1)Unncomment desired language(s) $(tput sgr 0)"
+echo "$(tput setaf 1)Uncomment desired language(s) $(tput sgr 0)"
 sleep 3
 sudo $EDITOR /etc/default/libc-locales
 sudo xbps-reconfigure -f glibc-locales
