@@ -48,11 +48,11 @@ echo
 echo "$(tput setaf 1)Which window manager do you want to use?$(tput sgr 0)"
 read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)	[o/A/s]" -n 1 wm
 wm="${wm:-a}"
-	if [[ $wm = "a" OR "o" ]]; then
+if [[ $wm = "a" OR "o" ]]; then
 	echo "$(tput setaf 1)Which terminal emulator do you want to use?$(tput sgr 0)"
 	read -p "SAKURA (s) or XTERM (x) or TERMINATOR (t)	[S/x/t]" -n 1 term
 	term="${term:-s}"
-	fi
+fi
 echo
 echo "$(tput setaf 1)Which text editor do you want to use?$(tput sgr 0)"
 read -p "NANO (n) or MICRO (m) or VIM (v)	[n/M/v]" -n 1 editor
@@ -90,7 +90,6 @@ elif [[ $editor = "v" ]]; then
 	export EDITOR=vim
 	echo EDITOR=vim > ~/.bashrc
 fi
-
 # Choose CPU, GPU, pasthrough -----------------------------------------------------------------------------------------
 if [[ $cpu = "a" ]]; then
 	if [[ $video = "n" ]]; then
@@ -184,37 +183,35 @@ elif [[ $term = "t" ]]; then
 	echo TERM=terminator > ~/.bashrc
 fi
 # Choose window manager -----------------------------------------------------------------------------------------
-    if [[ $wm = "o" ]]; then
-        sudo xbps-install -y $(cat INSTALL/4_desktop)
-        sudo xbps-install -y $(cat INSTALL/5_openbox)
-        -n 1 desk
-		sudo -u $USER obmenu-generator -p -i -u -d -c
-		echo "autorandr common &
-		tint2 &
-		setxkbmap cz &
-		nitrogen --restore &
-		volumeicon &
-		conky &" >> ~/.config/openbox/autostart
-#        cp ~/bin/dotfiles/home/zen/.config/openbox/rc.xml ~/.config/openbox
-    elif [[ $wm = "a" ]]; then
-		echo awesome
-        sudo xbps-install -y $(cat INSTALL/4_desktop)
-        sudo xbps-install -y $(cat INSTALL/5_awesome)
-	  fi
-
+if [[ $wm = "o" ]]; then
+    sudo xbps-install -y $(cat INSTALL/4_desktop)
+    sudo xbps-install -y $(cat INSTALL/5_openbox)
+    -n 1 desk
+	sudo -u $USER obmenu-generator -p -i -u -d -c
+	echo "autorandr common &
+	tint2 &
+	setxkbmap cz &
+	nitrogen --restore &
+	volumeicon &
+	conky &" >> ~/.config/openbox/autostart
+#   cp ~/bin/dotfiles/home/zen/.config/openbox/rc.xml ~/.config/openbox
+elif [[ $wm = "a" ]]; then
+	echo awesome
+    sudo xbps-install -y $(cat INSTALL/4_desktop)
+    sudo xbps-install -y $(cat INSTALL/5_awesome)
+fi
 sudo xbps-install -Sy $(cat INSTALL/6_media)
 #sudo xbps-install -Sy $(cat INSTALL/7_virtual)
 #sudo xbps-install -Sy $(cat INSTALL/8_big)
 #sudo xbps-install -Sy $(cat INSTALL/)
 
 # printer support -----------------------------------------------------------------------------------------
-    if [[ $cups = "y" ]]; then
-        sudo xbps-install -y $(cat INSTALL/9_print)
-        sudo ln -s /etc/sv/cupsd /var/service
-    fi    
+if [[ $cups = "y" ]]; then
+    sudo xbps-install -y $(cat INSTALL/9_print)
+    sudo ln -s /etc/sv/cupsd /var/service
+fi    
 
 # make fish base shell-----------------------------------------------------------------------------------------
-
 #echo ". ~/.config/fish/aliases.fish" >> ~/.config/fish/config.fish
 #echo "alias xterm 'sakura'" >> ~/.config/fish/aliases.fish
 
