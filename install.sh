@@ -179,15 +179,15 @@ fi
 # Choose terminal emulator --------------------------------------------------------------------------------------
 if [[ $term = "s" ]]; then
 	sudo ./piu i -y sakura
-	export TERM=sakura
+	export TERMINAL=sakura
 	echo TERM=sakura > ~/.bashrc
 elif [[ $term = "x" ]]; then
 	sudo ./piu i -y xterm
-	export TERM=xterm
+	export TERMINAL=xterm
 	echo TERM=xterm > ~/.bashrc
 elif [[ $term = "t" ]]; then		
 	sudo ./piu i -y terminator
-	export TERM=terminator
+	export TERMINAL=terminator
 	echo TERM=terminator > ~/.bashrc
 fi
 # Choose window manager -----------------------------------------------------------------------------------------
@@ -205,6 +205,7 @@ elif [[ $wm = "a" ]]; then
 	echo awesome
     sudo ./piu i -y $(cat INSTALL/04_desktop)
     sudo ./piu i -y $(cat INSTALL/05_awesome)
+	cp -r /etc/xdg/awesome ~/.config
 fi
 sudo ./piu i -y $(cat INSTALL/06_media)
 #sudo xbps-install -Sy $(cat INSTALL/07_virtual)
