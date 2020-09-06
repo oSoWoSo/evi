@@ -79,10 +79,10 @@ echo
 
 # Install packages -----------------------------------------------------------------------------------------
 # Nonfree and multilib repos
-sudo piu u
-sudo piu i $(cat INSTALL/1_repos)
-sudo piu u
-sudo piu i $(cat INSTALL/2_base)
+sudo ./piu u
+sudo ./piu i $(cat INSTALL/1_repos)
+sudo ./piu u
+sudo ./piu i $(cat INSTALL/2_base)
 
 # Remember git login information?
 #git config --global credential.helper store
@@ -225,7 +225,7 @@ fi
 
 # Virtualization support -----------------------------------------------------------------------------------------
 if [[ $virt = "y" ]]; then
-    sudo piu i virt-manager qemu
+    sudo ./piu i virt-manager qemu
 	sudo ln -s /etc/sv/libvirtd /var/service
 	sudo ln -s /etc/sv/virtlockd /var/service
 	sudo ln -s /etc/sv/virtlogd /var/service
