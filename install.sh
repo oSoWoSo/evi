@@ -178,8 +178,6 @@ elif [[ $shell = "z" ]]; then
 	sudo usermod --shell /bin/zsh $USER
 fi	
 # Choose terminal emulator --------------------------------------------------------------------------------------
-echo
-read -p "SAKURA (s) or XTERM (x) or TERMINATOR (t)	[S/x/t]" -n 1 term
 if [[ $term = "s" ]]; then
 	sudo ./piu i -y sakura
 	export TERM=sakura
