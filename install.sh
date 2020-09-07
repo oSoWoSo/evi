@@ -177,15 +177,15 @@ fi
 if [[ $term = "s" ]]; then
 	sudo ./piu i -y sakura
 	export TERMINAL="sakura"
-	echo TERM=sakura > ~/.bashrc
+	echo TERM="sakura" > ~/.bashrc
 elif [[ $term = "x" ]]; then
 	sudo ./piu i -y xterm
 	export TERMINAL="xterm"
-	echo TERM=xterm > ~/.bashrc
+	echo TERM="xterm" > ~/.bashrc
 elif [[ $term = "t" ]]; then		
 	sudo ./piu i -y terminator
 	export TERMINAL="terminator"
-	echo TERM=terminator > ~/.bashrc
+	echo TERM="terminator" > ~/.bashrc
 fi
 # Choose window manager -----------------------------------------------------------------------------------------
 if [[ $wm = "o" ]]; then
