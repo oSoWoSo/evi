@@ -16,15 +16,14 @@ picom
 plasma-workspace-wallpapers
 octoxbps
 lxqt-admin
-pcmanfm
-sakura
+lxqt-sudo
+spacefm
 geany
 geany-plugins
 geany-plugins-extra
 conky
 rofi
 pmount
-autorandr
 mesa-vaapi
 mesa-vdpau
 clearine
