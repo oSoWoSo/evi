@@ -203,6 +203,11 @@ elif [[ $wm = "a" ]]; then
     sudo ./piu i -y $(cat INSTALL/04_desktop)
     sudo ./piu i -y $(cat INSTALL/05_awesome)
 	cp -r /etc/xdg/awesome ~/.config
+	if [[ $term = "s" ]]; then
+		sed -i 's/xterm/sakura/g' ~/.config/awesome/rc.lua
+	elif [[ $term = "t" ]]; then
+		sed -i 's/xterm/terminator/g' ~/.config/awesome/rc.lua
+	fi
 fi
 sudo ./piu i -y $(cat INSTALL/06_media)
 #sudo xbps-install -Sy $(cat INSTALL/07_virtual)
