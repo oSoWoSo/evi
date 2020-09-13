@@ -3,6 +3,7 @@ xorg-fonts
 setxkbmap
 xarchiver
 xscreensaver
+xclip
 numlockx
 lightdm-gtk-greeter-settings
 lxtask
