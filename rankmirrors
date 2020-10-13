@@ -1,0 +1,23 @@
+#!/bin/sh
+MIR_LIST_URL='https://github.com/void-linux/void-docs/raw/master/src/xbps/repositories/mirrors/index.md'
+DLFILE=/static/xbps-static-0.33_4.x86_64-musl.tar.xz
+
+MIRRORS=$(curl -sL $MIR_LIST_URL | sed -rn 's/.*<(.*)>.*/\1/p')
+
+RESULTS=""
+
+while IFS= read -r MIRROR
+do
+    echo "Testing download from mirror: $MIRROR"
+    SPEED=$(curl -m 5 -so /dev/null -w '%{speed_download} %{time_pretransfer}' "$MIRROR$MIR_LIST_URL")
+    echo "$SPEED"
+    RESULTS="$RESULTS\n$MIRROR $SPEED"
+done << EOF
+$MIRRORS
+EOF
+
+echo "\nMirrors ranked by download speed:\n"
+echo $RESULTS | sort -k 2,2 -n
+
+echo "\nMirrors ranked by pre-transfer time:\n"
+echo $RESULTS | sort -k 3,3 -n -r
