@@ -1,4 +1,6 @@
 #!/bin/sh
+#use curl -sL 'https://gitlab.com/awesome-void/install/-/raw/master/rankmirrors' | sh
+#
 MIR_LIST_URL='https://github.com/void-linux/void-docs/raw/master/src/xbps/repositories/mirrors/index.md'
 DLFILE=/static/xbps-static-0.33_4.x86_64-musl.tar.xz
 
