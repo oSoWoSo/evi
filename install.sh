@@ -263,10 +263,10 @@ fi
 sudo ln -s /etc/sv/dbus /var/service/
 sudo ln -s /etc/sv/elogind /var/service/
 #sudo ln -s /etc/sv/acpid /var/service/
-sudo ln -s /etc/sv/socklog-unix /var/service/
-sudo ln -s /etc/sv/nanoklogd /var/service/
-sudo ln -s /etc/sv/crond /var/service/
-sudo ln -s /etc/sv/chronyd /var/service/
+#sudo ln -s /etc/sv/socklog-unix /var/service/
+#sudo ln -s /etc/sv/nanoklogd /var/service/
+#sudo ln -s /etc/sv/crond /var/service/
+#sudo ln -s /etc/sv/chronyd /var/service/
 
 if [[ $wm = "o" ]]; then
 	echo "$(tput setaf 1)Do you want to run lightdm now?$(tput sgr 0)"

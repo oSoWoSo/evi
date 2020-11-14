@@ -1,12 +1,61 @@
-echo "$(tput setaf 1)						Installing VGA passthrough$(tput sgr 0)"
-echo "#Edit grub: intel_iommu=on OR amd_iommu=on rd.driver.pre=vfio-pci kvm.ignore_msrs=1" >> /etc/default/grub
+#!/bin/bash
+echo -e "\e[32m Installing VGA passthrough\e[0m"
+
+# cpu check
+virt=$(LC_ALL=C lscpu | grep Virtualization)
+if virt=AMD-V
+	then
+	echo -e "\e[32m Using AMD cpu.\e[0m"
+	echo "#Add to your GRUB_CMDLINE_LINUX_DEFAULT= amd_iommu=on rd.driver.pre=vfio-pci kvm.ignore_msrs=1" >> /etc/default/grub
+	else
+	echo -e "\e[32m Using Intel cpu.\e[0m"
+	echo "#Add to your GRUB_CMDLINE_LINUX_DEFAULT= intel_iommu=on rd.driver.pre=vfio-pci kvm.ignore_msrs=1" >> /etc/default/grub
+fi
+
+# editor check
+EDITOR=$EDITOR
+if [ -e /bin/nano ]
+    then
+	EDITOR=nano
+elif  [ -e /bin/micro ]
+    then
+	EDITOR=micro
+else
+	EDITOR=vim
+fi
+
+echo -e "\e[32m Using $EDITOR editor.\e[0m"
 $EDITOR /etc/default/grub
-echo "Updating grub"
+
+echo -e "\e[32m Updating grub\e[0m"
 grub-mkconfig -o /boot/grub/grub.cfg
-echo "Getting GPU passthrough scripts ready"
-cp INSTALL/vfio-pci-override-vga.sh /usr/bin/vfio-pci-override-vga.sh
+
+echo -e "\e[32m Getting GPU passthrough scripts ready"
+cp vfio-pci-override-vga.sh /usr/bin/vfio-pci-override-vga.sh
 chmod 755 /usr/bin/vfio-pci-override-vga.sh
 echo "install vfio-pci /usr/bin/vfio-pci-override-vga.sh" > /etc/modprobe.d/local.conf
-cp INSTALL/local.conf /etc/dracut.conf.d/local.conf
-echo "Generating initramfs"
+
+if virt=AMD-V
+	then
+	cp amd.conf /etc/dracut.conf.d/local.conf
+	else
+	cp intel.conf /etc/dracut.conf.d/local.conf
+fi
+
+echo -e "\e[32m Generating initramfs\e[0m"
 dracut -f --kver $(uname -r)
+
+echo -e "\e[32m Getting latest ovmf from kraxel.org\e[0m"
+wget -m -np -nd -A "edk2.git-ovmf-x64*.noarch.rpm" https://www.kraxel.org/repos/jenkins/edk2/
+mv *.noarch.rpm edk2.git-ovmf-x64.noarch.rpm
+
+if [ -e /bin/rpmextract ]
+then
+	rpmextract edk2.git-ovmf-x64.noarch.rpm
+else
+	xbps-install -y rpmextract
+    rpmextract edk2.git-ovmf-x64.noarch.rpm
+    xbps-remove -y rpmextract
+fi
+mv usr/share /usr/
+echo -e "\e[32m Script finished\e[0m"
