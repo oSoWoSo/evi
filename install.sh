@@ -1,6 +1,10 @@
 #!/bin/bash
 # Void Linux post-install script
+echo
+echo "$(tput setaf 1)Dont't run as ROOT user!$(tput sgr 0)"
+echo	You will be asked for sudo password if needed...
 echo "$(tput setaf 3)Starting Void Linux post-install script$(tput sgr 0)"
+echo
 
 # Default Answers ------------------------------------------------------------------------------------------------
 cpu="${cpu:-a}"
@@ -18,8 +22,11 @@ virt="${virt:-y}"
 
 # Ask part -----------------------------------------------------------------------------------------------------------
 echo "$(tput setaf 1)Which CPU do you use?$(tput sgr 0)"
-read -p "AMD (a) or INTEL (i)	[A/i]" -n 1 cpu
+read -p "AMD (a) , INTEL (i) or you change your mind? QUIT(q)	[A/i/q]" -n 1 cpu
 cpu="${cpu:-a}"
+if [[ $cpu = "q" ]]; then
+	exit
+fi
 echo
 echo "$(tput setaf 1)Which GPU do you use?$(tput sgr 0)"
 read -p "NVIDIA (n), AMD (a), INTEL (i) or QEMU (q)	[n/a/i/Q] " -n 1 video
