@@ -30,61 +30,61 @@ none=$(tput sgr 0)
 
 # Ask part -----------------------------------------------------------------------------------------------------------
 echo "$(red)Which CPU do you use?$(none)"
-read -p "AMD (a) , INTEL (i) or you change your mind? QUIT(q)	[A/i/q]" -n 1 cpu
+read -p "AMD (a) , INTEL (i) or you change your mind? QUIT(q)	[A/i/q]" cpu
 cpu="${cpu:-a}"
 if [[ $cpu = "q" ]]; then
 	exit
 fi
 echo
 echo "$(red)Which GPU do you use?$(none)"
-read -p "NVIDIA (n), AMD (a), INTEL (i) or QEMU (q)	[n/a/i/Q] " -n 1 video
+read -p "NVIDIA (n), AMD (a), INTEL (i) or QEMU (q)	[n/a/i/Q] " video
 video="${video:-q}"
 if [[ $video = "n" ]]; then
 	echo "$(red)Do you want to install PCI passthrough?$(none)"
-	read -p "NO (n) or YES (y)	[N/y]" -n 1 pass
+	read -p "NO (n) or YES (y)	[N/y]" pass
 	pass="${pass:-n}"
 elif [[ $video = "a" ]]; then
 	echo "$(red)Do you want to install PCI passthrough?$(none)"
-	read -p "NO (n) or YES (y)	[N/y]" -n 1 pass
+	read -p "NO (n) or YES (y)	[N/y]" pass
 	pass="${pass:-n}"
 elif [[ $video = "i" ]]; then
 	echo "$(red)Do you want to install PCI passthrough?$(none)"
-	read -p "NO (n) or YES (y)	[N/y]" -n 1 pass
+	read -p "NO (n) or YES (y)	[N/y]" pass
 	pass="${pass:-n}"
 fi	
 echo
 echo "$(red)Which shell do you want to use?$(none)"
-read -p "FISH (f) or BASH (b) or ZSH (z)	[F/b/z]" -n 1 shell
+read -p "FISH (f) or BASH (b) or ZSH (z)	[F/b/z]" shell
 shell="${shell:-f}"
 echo
 echo "$(red)Which window manager do you want to use?$(none)"
-read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)	[o/A/s]" -n 1 wm
+read -p "OPENBOX (o) or AWESOME (a) or SOMETHING ELSE (s)	[o/A/s]" wm
 wm="${wm:-a}"
 echo
 if [[ $wm = "a" ]]; then
 	echo "$(red)Which terminal emulator do you want to use?$(none)"
-	read -p "SAKURA (s) or XTERM (x) or TERMINATOR (t)	[S/x/t]" -n 1 term
+	read -p "SAKURA (s) or XTERM (x) or TERMINATOR (t)	[S/x/t]" term
 	term="${term:-s}"
 elif [[ $wm = "o" ]]; then
 	echo "$(red)Which terminal emulator do you want to use?$(none)"
-	read -p "SAKURA (s) or XTERM (x) or TERMINATOR (t)	[S/x/t]" -n 1 term
+	read -p "SAKURA (s) or XTERM (x) or TERMINATOR (t)	[S/x/t]" term
 	term="${term:-s}"	
 fi
 echo
 echo "$(red)Which text editor do you want to use?$(none)"
-read -p "NANO (n) or MICRO (m) or VIM (v)	[n/M/v]" -n 1 editor
+read -p "NANO (n) or MICRO (m) or VIM (v)	[n/M/v]" editor
 editor="${editor:-m}"
 echo
 echo "$(red)Do you want to install printer support?$(none)"
-read -p "NO (n) or YES (y)	[n/Y]" -n 1 cups
+read -p "NO (n) or YES (y)	[n/Y]" cups
 cups="${cups:-y}"
 echo
 echo "$(red)Do you want to share package statistics with void devs?$(none)"
-read -p "NO (n) or YES (y)	[n/Y]" -n 1 pop
+read -p "NO (n) or YES (y)	[n/Y]" pop
 pop="${pop:-y}"
 echo
 echo "$(red)Do you want to install virt-manager?$(none)"
-read -p "NO (n) or YES (y)	[n/Y]" -n 1 virt
+read -p "NO (n) or YES (y)	[n/Y]" virt
 virt="${virt:-y}"
 echo
 
@@ -285,7 +285,7 @@ sudo ln -s /etc/sv/elogind /var/service/
 
 if [[ $wm = "o" ]]; then
 	echo "$(red)Do you want to run lightdm now?$(none)"
-	read -p "Run lightdm now? NO (n) or YES (y)	[n/Y]" -n 1 lightdm
+	read -p "Run lightdm now? NO (n) or YES (y)	[n/Y]" lightdm
 	lightdm="${lightdm:-y}"
 	echo
 	if [[ $lightdm = "y" ]]; then
@@ -298,7 +298,7 @@ if [[ $wm = "o" ]]; then
 	fi
 elif [[ $wm = "a" ]]; then
 	echo "$(red)Do you want to run lightdm now?$(none)"
-	read -p "Run lightdm now? NO (n) or YES (y)	[n/Y]" -n 1 lightdm
+	read -p "Run lightdm now? NO (n) or YES (y)	[n/Y]" lightdm
 	lightdm="${lightdm:-y}"
 	echo
 	if [[ $lightdm = "y" ]]; then
@@ -311,7 +311,7 @@ elif [[ $wm = "a" ]]; then
 	fi
 fi	
 echo "$(red)Do you want to restart your computer now?$(none)"
-read -p "Restart now? NO (n) or YES (y)	[N/y]" -n 1 reboot
+read -p "Restart now? NO (n) or YES (y)	[N/y]" reboot
 reboot="${reboot:-n}"
 echo
 if [[ $reboot = "n" ]]; then
